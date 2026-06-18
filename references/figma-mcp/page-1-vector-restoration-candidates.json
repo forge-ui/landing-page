@@ -1,0 +1,978 @@
+[
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-486-20-20x20",
+    "width": 20,
+    "x": 486,
+    "y": 20
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-934-20-20x20",
+    "width": 20,
+    "x": 934,
+    "y": 20
+  },
+  {
+    "height": 40,
+    "isCompanyLogo": false,
+    "name": "vector-120-64-40x40",
+    "width": 40,
+    "x": 120,
+    "y": 64
+  },
+  {
+    "height": 40,
+    "isCompanyLogo": false,
+    "name": "vector-975-64-40x40",
+    "width": 40,
+    "x": 975,
+    "y": 64
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-330-72-24x24",
+    "width": 24,
+    "x": 330,
+    "y": 72
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-457-72-24x24",
+    "width": 24,
+    "x": 457,
+    "y": 72
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-726-72-24x24",
+    "width": 24,
+    "x": 726,
+    "y": 72
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-1198-72-24x24",
+    "width": 24,
+    "x": 1198,
+    "y": 72
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-1191-355-24x24",
+    "width": 24,
+    "x": 1191,
+    "y": 355
+  },
+  {
+    "height": 64,
+    "isCompanyLogo": false,
+    "name": "vector-1045-398-64x64",
+    "width": 64,
+    "x": 1045,
+    "y": 398
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-940-455-24x24",
+    "width": 24,
+    "x": 940,
+    "y": 455
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-992-500-12x12",
+    "width": 12,
+    "x": 992,
+    "y": 500
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1088-500-12x12",
+    "width": 12,
+    "x": 1088,
+    "y": 500
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-380-512-24x24",
+    "width": 24,
+    "x": 380,
+    "y": 512
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-120-566-12x12",
+    "width": 12,
+    "x": 120,
+    "y": 566
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-346-734-24x24",
+    "width": 24,
+    "x": 346,
+    "y": 734
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-1300-760-20x20",
+    "width": 20,
+    "x": 1300,
+    "y": 760
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-1047-1208-24x24",
+    "width": 24,
+    "x": 1047,
+    "y": 1208
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-173-1221-12x12",
+    "width": 12,
+    "x": 173,
+    "y": 1221
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-190-1221-12x12",
+    "width": 12,
+    "x": 190,
+    "y": 1221
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-207-1221-12x12",
+    "width": 12,
+    "x": 207,
+    "y": 1221
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-176-1252-24x24",
+    "width": 24,
+    "x": 176,
+    "y": 1252
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-308-1262-9x9",
+    "width": 9,
+    "x": 308,
+    "y": 1262
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-386-1280-12x12",
+    "width": 12,
+    "x": 386,
+    "y": 1280
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-495-1299-48x24",
+    "width": 48,
+    "x": 495,
+    "y": 1299
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-409-1320-24x24",
+    "width": 24,
+    "x": 409,
+    "y": 1320
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-990-1408-12x12",
+    "width": 12,
+    "x": 990,
+    "y": 1408
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1007-1408-12x12",
+    "width": 12,
+    "x": 1007,
+    "y": 1408
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1024-1408-12x12",
+    "width": 12,
+    "x": 1024,
+    "y": 1408
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1024-1494-12x12",
+    "width": 12,
+    "x": 1024,
+    "y": 1494
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1120-1494-12x12",
+    "width": 12,
+    "x": 1120,
+    "y": 1494
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-600-1500-12x12",
+    "width": 12,
+    "x": 600,
+    "y": 1500
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-617-1500-12x12",
+    "width": 12,
+    "x": 617,
+    "y": 1500
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-634-1500-12x12",
+    "width": 12,
+    "x": 634,
+    "y": 1500
+  },
+  {
+    "height": 80,
+    "isCompanyLogo": false,
+    "name": "vector-737-1536-16x80",
+    "width": 16,
+    "x": 737,
+    "y": 1536
+  },
+  {
+    "height": 80,
+    "isCompanyLogo": false,
+    "name": "vector-780-1536-16x80",
+    "width": 16,
+    "x": 780,
+    "y": 1536
+  },
+  {
+    "height": 80,
+    "isCompanyLogo": false,
+    "name": "vector-867-1536-16x80",
+    "width": 16,
+    "x": 867,
+    "y": 1536
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-1196-1537-9x9",
+    "width": 9,
+    "x": 1196,
+    "y": 1537
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-1220-1537-9x9",
+    "width": 9,
+    "x": 1220,
+    "y": 1537
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-999-1582-16x16",
+    "width": 16,
+    "x": 999,
+    "y": 1582
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-1112-1587-24x24",
+    "width": 24,
+    "x": 1112,
+    "y": 1587
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-949-1596-52x24",
+    "width": 52,
+    "x": 949,
+    "y": 1596
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-999-1610-16x16",
+    "width": 16,
+    "x": 999,
+    "y": 1610
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-631-1613-9x9",
+    "width": 9,
+    "x": 631,
+    "y": 1613
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-650-1630-12x12",
+    "width": 12,
+    "x": 650,
+    "y": 1630
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-889-1630-12x12",
+    "width": 12,
+    "x": 889,
+    "y": 1630
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-144-2092-48x48",
+    "width": 48,
+    "x": 144,
+    "y": 2092
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-552-2092-48x48",
+    "width": 48,
+    "x": 552,
+    "y": 2092
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-960-2092-48x48",
+    "width": 48,
+    "x": 960,
+    "y": 2092
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-144-2316-48x48",
+    "width": 48,
+    "x": 144,
+    "y": 2316
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-552-2316-48x48",
+    "width": 48,
+    "x": 552,
+    "y": 2316
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-960-2316-48x48",
+    "width": 48,
+    "x": 960,
+    "y": 2316
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-1012-2956-48x48",
+    "width": 48,
+    "x": 1012,
+    "y": 2956
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-1068-2956-48x48",
+    "width": 48,
+    "x": 1068,
+    "y": 2956
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-837-2984-20x20",
+    "width": 20,
+    "x": 837,
+    "y": 2984
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-858-3328-12x12",
+    "width": 12,
+    "x": 858,
+    "y": 3328
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-914-3391-48x48",
+    "width": 48,
+    "x": 914,
+    "y": 3391
+  },
+  {
+    "height": 64,
+    "isCompanyLogo": false,
+    "name": "vector-1045-3476-64x64",
+    "width": 64,
+    "x": 1045,
+    "y": 3476
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-930-3496-24x24",
+    "width": 24,
+    "x": 930,
+    "y": 3496
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-144-3572-48x48",
+    "width": 48,
+    "x": 144,
+    "y": 3572
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-450-3572-48x48",
+    "width": 48,
+    "x": 450,
+    "y": 3572
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-992-3578-12x12",
+    "width": 12,
+    "x": 992,
+    "y": 3578
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1088-3578-12x12",
+    "width": 12,
+    "x": 1088,
+    "y": 3578
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-1167-3721-9x9",
+    "width": 9,
+    "x": 1167,
+    "y": 3721
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-200-4118-12x12",
+    "width": 12,
+    "x": 200,
+    "y": 4118
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-217-4118-12x12",
+    "width": 12,
+    "x": 217,
+    "y": 4118
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-234-4118-12x12",
+    "width": 12,
+    "x": 234,
+    "y": 4118
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-506-4176-52x24",
+    "width": 52,
+    "x": 506,
+    "y": 4176
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-353-4192-24x24",
+    "width": 24,
+    "x": 353,
+    "y": 4192
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-185-4193-9x9",
+    "width": 9,
+    "x": 185,
+    "y": 4193
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-204-4210-12x12",
+    "width": 12,
+    "x": 204,
+    "y": 4210
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-446-4210-12x12",
+    "width": 12,
+    "x": 446,
+    "y": 4210
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-198-4292-24x24",
+    "width": 24,
+    "x": 198,
+    "y": 4292
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-732-4327-24x24",
+    "width": 24,
+    "x": 732,
+    "y": 4327
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-249-4334-12x12",
+    "width": 12,
+    "x": 249,
+    "y": 4334
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-345-4334-12x12",
+    "width": 12,
+    "x": 345,
+    "y": 4334
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-504-4362-24x24",
+    "width": 24,
+    "x": 504,
+    "y": 4362
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-732-4375-24x24",
+    "width": 24,
+    "x": 732,
+    "y": 4375
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-422-4377-9x9",
+    "width": 9,
+    "x": 422,
+    "y": 4377
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-446-4377-9x9",
+    "width": 9,
+    "x": 446,
+    "y": 4377
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-732-4423-24x24",
+    "width": 24,
+    "x": 732,
+    "y": 4423
+  },
+  {
+    "height": 64,
+    "isCompanyLogo": false,
+    "name": "vector-1096-5018-64x64",
+    "width": 64,
+    "x": 1096,
+    "y": 5018
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-238-5132-16x16",
+    "width": 16,
+    "x": 238,
+    "y": 5132
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-646-5132-16x16",
+    "width": 16,
+    "x": 646,
+    "y": 5132
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-1054-5132-16x16",
+    "width": 16,
+    "x": 1054,
+    "y": 5132
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-888-5732-12x12",
+    "width": 12,
+    "x": 888,
+    "y": 5732
+  },
+  {
+    "height": 48,
+    "isCompanyLogo": false,
+    "name": "vector-841-5807-48x48",
+    "width": 48,
+    "x": 841,
+    "y": 5807
+  },
+  {
+    "height": 64,
+    "isCompanyLogo": false,
+    "name": "vector-972-5882-64x64",
+    "width": 64,
+    "x": 972,
+    "y": 5882
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-848-5902-24x24",
+    "width": 24,
+    "x": 848,
+    "y": 5902
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-184-5944-16x16",
+    "width": 16,
+    "x": 184,
+    "y": 5944
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-919-5984-12x12",
+    "width": 12,
+    "x": 919,
+    "y": 5984
+  },
+  {
+    "height": 12,
+    "isCompanyLogo": false,
+    "name": "vector-1015-5984-12x12",
+    "width": 12,
+    "x": 1015,
+    "y": 5984
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-410-6012-24x24",
+    "width": 24,
+    "x": 410,
+    "y": 6012
+  },
+  {
+    "height": 9,
+    "isCompanyLogo": false,
+    "name": "vector-1087-6012-9x9",
+    "width": 9,
+    "x": 1087,
+    "y": 6012
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-144-6494-24x24",
+    "width": 24,
+    "x": 144,
+    "y": 6494
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-552-6494-24x24",
+    "width": 24,
+    "x": 552,
+    "y": 6494
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-960-6494-24x24",
+    "width": 24,
+    "x": 960,
+    "y": 6494
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-436-6498-16x16",
+    "width": 16,
+    "x": 436,
+    "y": 6498
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-844-6498-16x16",
+    "width": 16,
+    "x": 844,
+    "y": 6498
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-1252-6498-16x16",
+    "width": 16,
+    "x": 1252,
+    "y": 6498
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-144-6766-24x24",
+    "width": 24,
+    "x": 144,
+    "y": 6766
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-552-6766-24x24",
+    "width": 24,
+    "x": 552,
+    "y": 6766
+  },
+  {
+    "height": 24,
+    "isCompanyLogo": false,
+    "name": "vector-960-6766-24x24",
+    "width": 24,
+    "x": 960,
+    "y": 6766
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-436-6770-16x16",
+    "width": 16,
+    "x": 436,
+    "y": 6770
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-844-6770-16x16",
+    "width": 16,
+    "x": 844,
+    "y": 6770
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-1252-6770-16x16",
+    "width": 16,
+    "x": 1252,
+    "y": 6770
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-229-7888-20x20",
+    "width": 20,
+    "x": 229,
+    "y": 7888
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-637-7888-20x20",
+    "width": 20,
+    "x": 637,
+    "y": 7888
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-1045-7888-20x20",
+    "width": 20,
+    "x": 1045,
+    "y": 7888
+  },
+  {
+    "height": 32,
+    "isCompanyLogo": false,
+    "name": "vector-1060-8310-32x32",
+    "width": 32,
+    "x": 1060,
+    "y": 8310
+  },
+  {
+    "height": 32,
+    "isCompanyLogo": false,
+    "name": "vector-1060-8402-32x32",
+    "width": 32,
+    "x": 1060,
+    "y": 8402
+  },
+  {
+    "height": 32,
+    "isCompanyLogo": false,
+    "name": "vector-1060-8554-32x32",
+    "width": 32,
+    "x": 1060,
+    "y": 8554
+  },
+  {
+    "height": 32,
+    "isCompanyLogo": false,
+    "name": "vector-1060-8646-32x32",
+    "width": 32,
+    "x": 1060,
+    "y": 8646
+  },
+  {
+    "height": 20,
+    "isCompanyLogo": false,
+    "name": "vector-1066-8744-20x20",
+    "width": 20,
+    "x": 1066,
+    "y": 8744
+  },
+  {
+    "height": 16,
+    "isCompanyLogo": false,
+    "name": "vector-760-9112-16x16",
+    "width": 16,
+    "x": 760,
+    "y": 9112
+  },
+  {
+    "height": 28,
+    "isCompanyLogo": false,
+    "name": "vector-120-9258-28x28",
+    "width": 28,
+    "x": 120,
+    "y": 9258
+  },
+  {
+    "height": 40,
+    "isCompanyLogo": false,
+    "name": "vector-160-9350-40x40",
+    "width": 40,
+    "x": 160,
+    "y": 9350
+  },
+  {
+    "height": 40,
+    "isCompanyLogo": false,
+    "name": "vector-208-9350-40x40",
+    "width": 40,
+    "x": 208,
+    "y": 9350
+  },
+  {
+    "height": 40,
+    "isCompanyLogo": false,
+    "name": "vector-256-9350-40x40",
+    "width": 40,
+    "x": 256,
+    "y": 9350
+  },
+  {
+    "height": 28,
+    "isCompanyLogo": false,
+    "name": "vector-120-9414-28x28",
+    "width": 28,
+    "x": 120,
+    "y": 9414
+  },
+  {
+    "height": 28,
+    "isCompanyLogo": false,
+    "name": "vector-120-9450-28x28",
+    "width": 28,
+    "x": 120,
+    "y": 9450
+  },
+  {
+    "height": 32,
+    "isCompanyLogo": false,
+    "name": "vector-120-9538-32x32",
+    "width": 32,
+    "x": 120,
+    "y": 9538
+  }
+]

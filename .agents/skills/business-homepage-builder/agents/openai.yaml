@@ -1,0 +1,6 @@
+interface:
+  display_name: "Business Homepage Builder"
+  short_description: "Build verified product homepages"
+  default_prompt: "Use $business-homepage-builder to turn this product brief into a verified official website page."
+policy:
+  allow_implicit_invocation: true
