@@ -1,4 +1,4 @@
-# Forge Homepage
+# Forge Landing Page
 
 这是把 Figma 源文件和 Figma 导出的 `md` 源码还原成 React 项目的组件库。每个组件组按用户原始规则处理：一个 JSX 代码片段，加上紧跟在后面的 `// 文案` 和 style 描述，作为同一组 `cssNotes` 元数据保留。
 
@@ -13,10 +13,10 @@
 - `src/components/figma-ui-replacements.tsx` 用 DOM/CSS 和真实图片资产补回 md 导出丢失的 UI mockup、icon/vector 和 image-fill 层
 - `src/components/homepage-restoration.tsx` 只用于页面级 overlay 和 Contact map 恢复
 - `images/` 作为 Vite `publicDir` 发布原始图片资产
-- `.agents/skills/forge-homepage-builder/references/figma-mcp-source.md` 记录 Figma MCP 节点、变量、资产和视觉基准
+- `.agents/skills/landing-page-builder/references/figma-mcp-source.md` 记录 Figma MCP 节点、变量、资产和视觉基准
 - `references/figma-mcp/landing-page-1-1909-17785.png` 是 Figma MCP 导出的 1440x9742 整页视觉基准
-- `.agents/skills/forge-homepage-builder/references/asset-recovery.md` 记录本地资产回填、Figma crop、结构化 artwork 和路由验收结果
-- `.agents/skills/forge-homepage-builder` 是给 Codex 使用的官网改造 skill
+- `.agents/skills/landing-page-builder/references/asset-recovery.md` 记录本地资产回填、Figma crop、结构化 artwork 和路由验收结果
+- `.agents/skills/landing-page-builder` 是给 Codex 使用的官网改造 skill
 
 ## 本地运行
 
@@ -52,13 +52,13 @@ npm run build
 | `src/components/figma-ui-replacements.tsx` | Figma 替换层：真实图片、lucide icon、DOM/CSS mockup、image-fill artwork |
 | `src/components/homepage-restoration.tsx` | 页面级 Figma overlay 和 Contact map 恢复层 |
 | `src/styles.css` | 实际页面 1440px 居中画布、组件库样式 |
-| `.agents/skills/forge-homepage-builder/references/figma-mcp-source.md` | Figma MCP 真源说明和节点索引 |
+| `.agents/skills/landing-page-builder/references/figma-mcp-source.md` | Figma MCP 真源说明和节点索引 |
 | `references/figma-mcp/landing-page-1-1909-17785.png` | Figma 原始整页视觉基准 |
-| `.agents/skills/forge-homepage-builder/references/asset-recovery.md` | 本地资产回填、Figma MCP crop、结构化 artwork 和恢复层规则 |
+| `.agents/skills/landing-page-builder/references/asset-recovery.md` | 本地资产回填、Figma MCP crop、结构化 artwork 和恢复层规则 |
 | `images/figma-crops/` | 从 Figma MCP 节点截图裁出的稳定页面/section 资产 |
 | `images/figma-restoration/` | 用于页面级 overlay 的恢复层资产 |
 | `images/fonts/` | 本地化的 Satoshi 和 Onest 字体 |
-| `.agents/skills/forge-homepage-builder` | Codex 官网拼装和业务改造 skill |
+| `.agents/skills/landing-page-builder` | Codex 官网拼装和业务改造 skill |
 
 ## 改造原则
 

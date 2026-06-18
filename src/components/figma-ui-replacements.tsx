@@ -5,6 +5,8 @@ import {
   ArrowUpRight,
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CircleDot,
   Eye,
   Figma,
@@ -38,6 +40,15 @@ type IconGlyphProps = {
 
 type GeneratedArtworkProps = {
   style?: CSSProperties;
+};
+
+type FlagGlyphProps = {
+  flag: string;
+  style?: CSSProperties;
+};
+
+type CompanyLogoProps = {
+  id: string;
 };
 
 const transparentAssets = [
@@ -108,6 +119,123 @@ export function FigmaGeneratedArtwork({ style }: GeneratedArtworkProps) {
       <div className="figma-lazarus-circuit figma-lazarus-circuit-c" />
       <div className="figma-lazarus-banner-noise" />
     </div>
+  );
+}
+
+export function FigmaDecorativeShape({ style }: GeneratedArtworkProps) {
+  return (
+    <div aria-hidden="true" className="figma-decorative-shape figma-testimonial-orbit" style={style}>
+      <span />
+      <i />
+    </div>
+  );
+}
+
+export function FigmaFlagGlyph({ flag, style }: FlagGlyphProps) {
+  const size = readSize(style?.width) ?? 20;
+  const label = flagGlyphs[flag as keyof typeof flagGlyphs] ?? flagGlyphs.english;
+
+  return (
+    <span
+      aria-hidden="true"
+      className="figma-flag-glyph"
+      style={{
+        ...style,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "transparent",
+        borderRadius: 999,
+        fontSize: Math.max(14, size),
+        lineHeight: 1,
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+const flagGlyphs = {
+  palestine: "🇵🇸",
+  indonesia: "🇮🇩",
+  china: "🇨🇳",
+  english: "🇺🇸",
+  russian: "🇷🇺",
+} as const;
+
+const companyLogos = {
+  "1": { width: 186, label: "ChatSphere", labelX: 44, icon: "chat" },
+  "2": { width: 179, label: "globetrek", labelX: 46, icon: "globe" },
+  "3": { width: 106, label: "swift", labelX: 42, icon: "swift" },
+  "4": { width: 117, label: "Logix", labelX: 44, icon: "logix" },
+  "5": { width: 91, label: "KRAFT", labelX: 0, icon: "kraft" },
+} as const;
+
+export function FigmaCompanyLogo({ id }: CompanyLogoProps) {
+  const logo = companyLogos[id as keyof typeof companyLogos] ?? companyLogos["1"];
+  const textStyle = {
+    fill: "#6B7280",
+    fontFamily: '"Satoshi", "Onest", Inter, ui-sans-serif, system-ui, sans-serif',
+    fontSize: logo.icon === "kraft" ? 31 : logo.icon === "globe" ? 27 : 24,
+    fontWeight: logo.icon === "kraft" ? 900 : 800,
+    letterSpacing: logo.icon === "kraft" ? -0.8 : 0,
+  };
+
+  return (
+    <svg
+      aria-hidden="true"
+      data-company-logo={id}
+      fill="none"
+      height="40"
+      viewBox={`0 0 ${logo.width} 40`}
+      width={logo.width}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CompanyLogoMark icon={logo.icon} />
+      <text dominantBaseline="middle" style={textStyle} x={logo.labelX} y="20">
+        {logo.label}
+      </text>
+    </svg>
+  );
+}
+
+function CompanyLogoMark({ icon }: { icon: string }) {
+  if (icon === "kraft") return null;
+
+  if (icon === "chat") {
+    return (
+      <g stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+        <circle cx="20" cy="20" r="15" />
+        <path d="M13.5 18.5c1.8 2 3.8 2 5.6 0M21.5 18.5c1.8 2 3.8 2 5.6 0M14.5 25.5c3.8 3.1 7.8 3.1 11.6 0" />
+      </g>
+    );
+  }
+
+  if (icon === "globe") {
+    return (
+      <g stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+        <path d="M7 24h26M10 29h20M13 34h14" />
+        <path d="M13 20a8 8 0 0 1 16 0" />
+        <path d="M20 8v5M11.5 11.5l3.5 3.5M28.5 11.5 25 15M5 18h5M30 18h5" />
+      </g>
+    );
+  }
+
+  if (icon === "swift") {
+    return (
+      <g stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3">
+        <path d="M6 14h20c4.5 0 5 6 1 7.5" />
+        <path d="M4 22h18c4.5 0 5 6 1 7.5" />
+        <path d="M14 7h12c4.5 0 5 6 1 7.5" />
+      </g>
+    );
+  }
+
+  return (
+    <g stroke="#6B7280" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.6">
+      <path d="M20 9 31 20 20 31 9 20 20 9Z" />
+      <path d="M20 2v4M20 34v4M2 20h4M34 20h4M7.2 7.2l2.9 2.9M29.9 29.9l2.9 2.9M32.8 7.2l-2.9 2.9M10.1 29.9l-2.9 2.9" />
+    </g>
   );
 }
 
@@ -298,6 +426,10 @@ function iconGlyphForName(icon: string) {
       return Check;
     case "chevron-down":
       return ChevronDown;
+    case "chevron-left":
+      return ChevronLeft;
+    case "chevron-right":
+      return ChevronRight;
     case "figma":
       return Figma;
     case "gift":

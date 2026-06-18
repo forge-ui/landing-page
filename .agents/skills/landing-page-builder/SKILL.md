@@ -1,9 +1,9 @@
 ---
-name: forge-homepage-builder
-description: Build and adapt official websites from the forge-homepage Figma source. Use Figma MCP as the visual/asset authority, and use the md export plus generated React registry as the editable structure source. Use when Codex needs to restore, inspect, compose, or business-customize the homepage from the Figma frame, page-1.md, page-2.md, pricing.md, contact.md, arcitle.md, and sections/*.md without visually imitating or rewriting the design from scratch.
+name: landing-page-builder
+description: Build and adapt official websites from the landing-page Figma source. Use Figma MCP as the visual/asset authority, and use the md export plus generated React registry as the editable structure source. Use when Codex needs to restore, inspect, compose, or business-customize the landing page from the Figma frame, page-1.md, page-2.md, pricing.md, contact.md, arcitle.md, and sections/*.md without visually imitating or rewriting the design from scratch.
 ---
 
-# Forge Homepage Builder
+# Forge Landing Page Builder
 
 你在维护一个从 Figma 源文件和 `md` 导出源码还原的官网组件库。目标是让 Codex 基于真实 Figma 节点、真实导出代码和可追溯组件拼装改造官网，而不是按截图或视觉印象重新写一套。
 

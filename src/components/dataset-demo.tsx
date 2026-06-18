@@ -34,11 +34,11 @@ const navItems = [
 ];
 
 const partners = [
-  { name: "ZWSOFT", logo: "partner1.png" },
-  { name: "大全集团", logo: "partner2.png" },
-  { name: "用友", logo: "partner3.png" },
-  { name: "燕东微电子", logo: "partner4.png" },
-  { name: "长安汽车", logo: "partner5.png" },
+  { name: "ZWSOFT", mark: "Z" },
+  { name: "大全集团", mark: "D" },
+  { name: "用友", mark: "Y" },
+  { name: "燕东微电子", mark: "M" },
+  { name: "长安汽车", mark: "C" },
 ];
 
 const engines: Array<{
@@ -131,7 +131,10 @@ export function DatasetDemo() {
 
         <section className="dataset-partners dataset-container" aria-label="合作品牌">
           {partners.map((partner) => (
-            <img alt={partner.name} key={partner.name} src={asset(partner.logo)} />
+            <span className="dataset-partner-logo" key={partner.name}>
+              <b>{partner.mark}</b>
+              {partner.name}
+            </span>
           ))}
         </section>
 
@@ -226,7 +229,7 @@ function DatasetHeader() {
       <nav className="dataset-original-nav" aria-label="Dataset homepage navigation">
         <div className="dataset-original-nav-left">
           <a className="dataset-original-logo" href="#dataset-demo">
-            <img alt="" src={asset("logoIcon.png")} />
+            <span className="dataset-original-logo-mark" aria-hidden="true" />
             <span>比特数检</span>
           </a>
           <div className="dataset-original-links">
@@ -346,7 +349,7 @@ function DatasetFooter() {
       <div className="dataset-footer-main dataset-container">
         <div className="dataset-footer-brand">
           <div>
-            <img alt="" src={asset("logoIcon.png")} />
+            <span className="dataset-original-logo-mark" aria-hidden="true" />
             <span>比特数检</span>
           </div>
           <p>大模型数据质量保障平台</p>

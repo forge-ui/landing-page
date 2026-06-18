@@ -4,14 +4,11 @@ const vectorOverlayNames = new Set([
   "banner-gift",
   "banner-arrow",
   "banner-close",
-  "nav-globe-button",
   "nav-why-chevron",
   "nav-features-chevron",
   "nav-resources-chevron",
-  "nav-figma-icon",
   "hero-preview-arrow",
   "discount-tag",
-  "scroll-arrow",
   "used-by-icon",
 ]);
 

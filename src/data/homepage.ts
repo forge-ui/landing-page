@@ -189,7 +189,7 @@ export const faqs = [
   {
     question: "How should Codex modify this project later?",
     answer:
-      "Invoke the local forge-homepage-builder skill, pick a section plan, update content first, then change components only when the business structure requires it.",
+      "Invoke the local landing-page-builder skill, pick a section plan, update content first, then change components only when the business structure requires it.",
   },
   {
     question: "Is this tied to a single brand?",

@@ -245,33 +245,7 @@ const scopedPlaceholderAssets = {
   },
 };
 
-const companyLogoAssets = {
-  "1": {
-    src: "/figma-restoration/page-1/company-1-chatsphere-186x40.png",
-    width: 186,
-    height: 40,
-  },
-  "2": {
-    src: "/figma-restoration/page-1/company-2-globetrek-179x40.png",
-    width: 179,
-    height: 40,
-  },
-  "3": {
-    src: "/figma-restoration/page-1/company-3-swift-106x40.png",
-    width: 106,
-    height: 40,
-  },
-  "4": {
-    src: "/figma-restoration/page-1/company-4-logix-117x40.png",
-    width: 117,
-    height: 40,
-  },
-  "5": {
-    src: "/figma-restoration/page-1/company-5-kraft-91x40.png",
-    width: 91,
-    height: 40,
-  },
-};
+const companyLogoIds = new Set(["1", "2", "3", "4", "5"]);
 
 const droppedOverlayPlaceholders = {
   "page-1.md#1": new Set(["486x486", "504x384"]),
@@ -337,7 +311,7 @@ function extractGroups(source) {
 
     const groupIndex = result.length + 1;
     const code = sanitizeJsx(codeLines.join("\n"), source.file, groupIndex);
-    const cssNotes = trimOuterBlankLines(noteLines).join("\n");
+    const cssNotes = sanitizeCssNotes(trimOuterBlankLines(noteLines).join("\n"));
     const orphanBefore = trimOuterBlankLines(pendingOrphan).join("\n");
     pendingOrphan = [];
 
@@ -381,8 +355,12 @@ function sanitizeJsx(code, sourceFile, groupIndex) {
       replaceFigmaVectorArtifacts(
         replaceFigmaCropImages(
           restoreFigmaCropOpacity(
-            replaceCompanyLogoBlocks(
-              replaceKnownPlaceholders(dropFigmaOverlayPlaceholders(code, sourceFile, groupIndex), sourceFile, groupIndex),
+            replaceFigmaFlagGroups(
+              replaceCompanyLogoBlocks(
+                removeScrollDownExploreBlocks(
+                  replaceKnownPlaceholders(dropFigmaOverlayPlaceholders(code, sourceFile, groupIndex), sourceFile, groupIndex),
+                ),
+              ),
             ),
           ),
         ),
@@ -487,6 +465,10 @@ function replaceFigmaCropImages(code) {
 
 function replaceFigmaVectorArtifacts(code) {
   return code.replace(/<div style={{([^}]*)}} \/>/g, (match, style) => {
+    if (isTestimonialDecorativeShape(style)) {
+      return `<FigmaDecorativeShape style={{${stripDecorativeShapeBackground(style)}}} />`;
+    }
+
     if (isWhiteOutlineVector(style) || isIconBackingPlaceholder(style) || isTinyOutlinedIconFragment(style)) {
       return `<span aria-hidden="true" data-figma-vector-artifact="true" style={{display: 'none'}} />`;
     }
@@ -497,6 +479,18 @@ function replaceFigmaVectorArtifacts(code) {
 
     if (isImageFillPlaceholder(style)) {
       return `<FigmaGeneratedArtwork style={{${stripImageFillPlaceholderBackground(style)}}} />`;
+    }
+
+    if (isChevronIconMask(style)) {
+      return `<FigmaIconGlyph icon="${inferChevronIcon(style)}" style={{${style}}} />`;
+    }
+
+    if (isArrowUpRightIconMask(style)) {
+      return `<FigmaIconGlyph icon="arrow-up-right" style={{${style}}} />`;
+    }
+
+    if (isSmallIconMask(style)) {
+      return `<FigmaVectorGlyph style={{${style}}} />`;
     }
 
     if (isSolidIconMask(style)) {
@@ -518,6 +512,50 @@ function replaceFigmaFragmentIconGroups(code) {
   return code.replace(
     new RegExp(hiddenVectorGroupPattern, "g"),
     `<FigmaIconGlyph icon="figma" style={{width: 20, height: 20, position: 'relative', overflow: 'hidden', color: 'var(--text-brand-on-brand, white)'}} />`,
+  );
+}
+
+function replaceFigmaFlagGroups(code) {
+  return code
+    .replace(flagPattern(16, [
+      "width: 16, height: 16, left: 0, top: 0, position: 'absolute'",
+      "width: 13.16, height: 5.22, left: 2.34, top: 0, position: 'absolute', background: 'black'",
+      "width: 13.16, height: 5.22, left: 2.34, top: 10.78, position: 'absolute', background: '#6DA544'",
+      "width: 8, height: 11.31, left: 0, top: 2.34, position: 'absolute', background: '#D80027'",
+    ]), `<FigmaFlagGlyph flag="palestine" style={{width: 16, height: 16, position: 'relative', overflow: 'hidden'}} />`)
+    .replace(flagPattern(24, [
+      "width: 24, height: 24, left: 0, top: 0, position: 'absolute', background: '#F0F0F0'",
+      "width: 24, height: 12, left: 0, top: 0, position: 'absolute', background: '#A2001D'",
+    ]), `<FigmaFlagGlyph flag="indonesia" style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}} />`)
+    .replace(flagPattern(24, [
+      "width: 24, height: 24, left: 0, top: 0, position: 'absolute', background: '#D80027'",
+      "width: 8.77, height: 8.35, left: 2.18, top: 7.30, position: 'absolute', background: '#FFDA44'",
+      "width: 3.18, height: 3.29, left: 12.15, top: 15.30, position: 'absolute', background: '#FFDA44'",
+      "width: 3.29, height: 3.15, left: 15.15, top: 12.58, position: 'absolute', background: '#FFDA44'",
+      "width: 3.26, height: 3.24, left: 15.01, top: 8.52, position: 'absolute', background: '#FFDA44'",
+      "width: 3.20, height: 3.28, left: 12.14, top: 5.39, position: 'absolute', background: '#FFDA44'",
+    ]), `<FigmaFlagGlyph flag="china" style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}} />`)
+    .replace(flagPattern(24, [
+      "width: 24, height: 24, left: 0, top: 0, position: 'absolute', background: '#F0F0F0'",
+      "width: 12.52, height: 3.13, left: 11.48, top: 8.87, position: 'absolute', background: '#D80027'",
+      "width: 10.76, height: 3.13, left: 11.48, top: 2.61, position: 'absolute', background: '#D80027'",
+      "width: 14.94, height: 2.61, left: 4.53, top: 21.39, position: 'absolute', background: '#D80027'",
+      "width: 23.17, height: 3.13, left: 0.41, top: 15.13, position: 'absolute', background: '#D80027'",
+      "width: 12, height: 12, left: 0, top: 0, position: 'absolute', background: '#0052B4'",
+    ]), `<FigmaFlagGlyph flag="english" style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}} />`)
+    .replace(flagPattern(24, [
+      "width: 24, height: 24, left: 0, top: 0, position: 'absolute', background: '#F0F0F0'",
+      "width: 24, height: 9.39, left: 0, top: 7.83, position: 'absolute', background: '#0052B4'",
+      "width: 22.51, height: 7.83, left: 0.75, top: 16.17, position: 'absolute', background: '#D80027'",
+    ]), `<FigmaFlagGlyph flag="russian" style={{width: 24, height: 24, position: 'relative', overflow: 'hidden'}} />`);
+}
+
+function flagPattern(size, fragments) {
+  return new RegExp(
+    String.raw`<div style={{width: ${size}, height: ${size}, position: 'relative', overflow: 'hidden'}}>\s*` +
+      fragments.map((style) => String.raw`<div style={{${escapeRegExp(style)}}} />\s*`).join("") +
+      String.raw`</div>`,
+    "g",
   );
 }
 
@@ -557,6 +595,24 @@ function isImageFillPlaceholder(style) {
   return width >= 40 && height >= 40;
 }
 
+function isTestimonialDecorativeShape(style) {
+  if (!style.includes("position: 'absolute'")) return false;
+  if (!style.includes("background: 'var(--bg-default-tertiary, #F3F3F5)'")) return false;
+
+  const width = readStyleNumber(style, "width");
+  const height = readStyleNumber(style, "height");
+  if (!width || !height) return false;
+
+  return width >= 180 && width <= 230 && height >= 140 && height <= 180;
+}
+
+function stripDecorativeShapeBackground(style) {
+  return style
+    .replace(/,\s*background:\s*'var\(--bg-default-tertiary, #F3F3F5\)'/g, "")
+    .replace(/background:\s*'var\(--bg-default-tertiary, #F3F3F5\)',\s*/g, "")
+    .replace(/background:\s*'var\(--bg-default-tertiary, #F3F3F5\)'/g, "");
+}
+
 function isGeneratedArtworkGlow(style) {
   if (!/background:\s*'var\(--(?:bg-brand-primary|color-brand-500)/.test(style)) return false;
   if (!style.includes("filter: 'blur(")) return false;
@@ -588,6 +644,43 @@ function isSolidIconMask(style) {
   return width >= 8 && width <= 40 && height >= 6 && height <= 40;
 }
 
+function isSmallIconMask(style) {
+  if (!style.includes("position: 'absolute'")) return false;
+  if (!style.includes("background: 'var(--text-")) return false;
+  if (style.includes("borderRadius") || style.includes("boxShadow") || style.includes("filter")) return false;
+
+  const width = readStyleNumber(style, "width");
+  const height = readStyleNumber(style, "height");
+  if (!width || !height) return false;
+
+  return width >= 5 && width <= 16 && height >= 5 && height <= 16;
+}
+
+function isChevronIconMask(style) {
+  if (!style.includes("background: 'var(--text-")) return false;
+
+  const width = readStyleNumber(style, "width");
+  const height = readStyleNumber(style, "height");
+  if (!width || !height) return false;
+
+  return width >= 6 && width <= 8 && height >= 10 && height <= 12;
+}
+
+function inferChevronIcon(style) {
+  return style.includes("--text-brand-on-brand") ? "chevron-right" : "chevron-left";
+}
+
+function isArrowUpRightIconMask(style) {
+  if (!style.includes("position: 'absolute'")) return false;
+  if (!style.includes("background: 'var(--text-")) return false;
+
+  const width = readStyleNumber(style, "width");
+  const height = readStyleNumber(style, "height");
+  if (!width || !height) return false;
+
+  return width >= 7 && width <= 8 && height >= 7 && height <= 8;
+}
+
 function isPointerCursorMask(style) {
   if (!style.includes("position: 'absolute'")) return false;
   if (!/background:\s*'var\(--(?:bg-[a-z]+-primary|color-brand-500)/.test(style)) return false;
@@ -612,15 +705,41 @@ function replaceCompanyLogoBlocks(code) {
 
     result += code.slice(cursor, start);
     const id = code.slice(start, start + 64).match(/data-company-logo="(\d+)"/)?.[1];
-    const asset = id ? companyLogoAssets[id] : null;
     const end = findMatchingDivEnd(code, start);
 
-    if (!asset || end === -1) {
+    if (!id || !companyLogoIds.has(id) || end === -1) {
       result += code.slice(start);
       break;
     }
 
-    result += `<img alt="" data-company-logo="${id}" src="${asset.src}" style={{width: ${asset.width}, height: ${asset.height}, objectFit: 'contain', display: 'block', flexShrink: 0}} />`;
+    result += `<FigmaCompanyLogo id="${id}" />`;
+    cursor = end;
+  }
+
+  return result;
+}
+
+function removeScrollDownExploreBlocks(code) {
+  let result = "";
+  let cursor = 0;
+
+  while (cursor < code.length) {
+    const textIndex = code.indexOf("Scroll down to explore", cursor);
+    if (textIndex === -1) {
+      result += code.slice(cursor);
+      break;
+    }
+
+    const start = code.lastIndexOf("<div data-size=\"S\"", textIndex);
+    const end = start === -1 ? -1 : findMatchingDivEnd(code, start);
+
+    if (start === -1 || end === -1) {
+      result += code.slice(cursor, textIndex);
+      cursor = textIndex + "Scroll down to explore".length;
+      continue;
+    }
+
+    result += code.slice(cursor, start);
     cursor = end;
   }
 
@@ -698,6 +817,15 @@ function parseTextStyles(cssNotes) {
     .filter(Boolean);
 }
 
+function sanitizeCssNotes(cssNotes) {
+  if (!cssNotes.trim()) return cssNotes;
+
+  return cssNotes
+    .split(/\n---\n/g)
+    .filter((chunk) => !chunk.includes("Scroll down to explore"))
+    .join("\n---\n");
+}
+
 function trimOuterBlankLines(lines) {
   let start = 0;
   let end = lines.length;
@@ -743,7 +871,7 @@ ${indent(group.code, 4)}
 // @ts-nocheck
 
 import type { ComponentType } from "react";
-import { FigmaGeneratedArtwork, FigmaIconGlyph, FigmaUiReplacement, FigmaVectorGlyph } from "../components/figma-ui-replacements";
+import { FigmaCompanyLogo, FigmaDecorativeShape, FigmaFlagGlyph, FigmaGeneratedArtwork, FigmaIconGlyph, FigmaUiReplacement, FigmaVectorGlyph } from "../components/figma-ui-replacements";
 
 export type RawFigmaTextStyle = {
   text: string;

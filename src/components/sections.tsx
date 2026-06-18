@@ -135,7 +135,6 @@ function HeaderSection({ refData }: { refData: SectionRef }) {
       {!emailVariant ? (
         <div className="hero-bottom">
           <AvatarStack images={heroAvatars} label="10M+ Used by teams and professionals." />
-          <ArrowLink>Scroll down to explore</ArrowLink>
         </div>
       ) : null}
     </SectionShell>

@@ -5,11 +5,10 @@ import {
   rawSectionGroups,
   type RawFigmaGroup,
 } from "./generated/figmaRegistry";
-import { DatasetDemo } from "./components/dataset-demo";
 import { ContactRestoration, HomepageRestoration } from "./components/homepage-restoration";
 
 type PageRoute = "page-1" | "page-2" | "pricing" | "contact" | "article";
-type AppRoute = PageRoute | "kit" | "dataset-demo";
+type AppRoute = PageRoute | "kit";
 type KitCategory = "Pages" | string;
 
 const pageRoutes: Record<PageRoute, string> = {
@@ -24,6 +23,9 @@ function App() {
   const [route, setRoute] = useState<AppRoute>(() => readRoute());
 
   useEffect(() => {
+    if (!window.location.hash) {
+      window.history.replaceState(null, "", "#kit");
+    }
     const syncRoute = () => setRoute(readRoute());
     window.addEventListener("hashchange", syncRoute);
     return () => window.removeEventListener("hashchange", syncRoute);
@@ -33,20 +35,202 @@ function App() {
     return <RawWorkbench />;
   }
 
-  if (route === "dataset-demo") {
-    return <DatasetDemo />;
-  }
-
   const page = rawPageGroups.find((group) => group.source === pageRoutes[route]) ?? rawPageGroups[0];
   const Page = page.component;
 
   return (
     <main className="figma-page-host" data-source={page.source}>
       <Page />
+      {page.source === "page-1.md" || page.source === "page-2.md" ? <FigmaHeaderDropdowns /> : null}
       {page.source === "page-1.md" ? <HomepageRestoration /> : null}
       {page.source === "contact.md" ? <ContactRestoration /> : null}
       {page.source === "page-1.md" ? <PageOneScrollFade /> : null}
     </main>
+  );
+}
+
+function FigmaHeaderDropdowns() {
+  return (
+    <div className="figma-header-dropdown-layer" aria-label="Header dropdown menus">
+      <div className="figma-header-dropdown-trigger figma-header-dropdown-trigger--why" tabIndex={0}>
+        <HeaderMenuVariantOne />
+      </div>
+      <div className="figma-header-dropdown-trigger figma-header-dropdown-trigger--features" tabIndex={0}>
+        <HeaderMenuVariantTwo />
+      </div>
+      <div className="figma-header-dropdown-trigger figma-header-dropdown-trigger--resources" tabIndex={0}>
+        <HeaderMenuVariantThree />
+      </div>
+      <div className="figma-header-dropdown-trigger figma-header-dropdown-trigger--language" tabIndex={0}>
+        <HeaderMenuLanguage />
+      </div>
+    </div>
+  );
+}
+
+function HeaderMenuVariantOne() {
+  return (
+    <div className="figma-header-dropdown-card figma-native-menu figma-native-menu--one">
+      <HeaderMenuLabel variant="variant one" />
+      <div className="figma-native-menu-panel">
+        <HeaderMenuItem active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
+        <HeaderMenuItem title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+        <HeaderMenuItem title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
+        <HeaderSubmenu />
+      </div>
+    </div>
+  );
+}
+
+function HeaderMenuVariantTwo() {
+  return (
+    <div className="figma-header-dropdown-card figma-native-menu figma-native-menu--two">
+      <div className="figma-native-menu-column">
+        <HeaderMenuLabel variant="variant two" />
+        <div className="figma-native-menu-panel">
+          <HeaderMenuItem active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
+          <HeaderMenuItem title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+          <HeaderMenuItem badge title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
+          <HeaderMenuItem title="Free Updates" text="Lifetime Figma update for free 🎉" icon="spark" />
+          <HeaderMenuItem title="Art Direction" text="Modern minimalism ✨" icon="palette" />
+          <HeaderSubmenu />
+        </div>
+      </div>
+      <div className="figma-native-project-card">
+        <div className="figma-native-project-visual">
+          <div className="figma-native-project-top" />
+          <div className="figma-native-project-eye" />
+        </div>
+        <strong>Project Lazarus</strong>
+        <p>Workspace 3 · Member 11</p>
+        <div className="figma-native-progress"><span /></div>
+        <button type="button">Get started!</button>
+        <small>Modern minimalism web template</small>
+      </div>
+    </div>
+  );
+}
+
+function HeaderMenuVariantThree() {
+  return (
+    <div className="figma-header-dropdown-card figma-native-menu figma-native-menu--three">
+      <HeaderMenuLabel variant="variant three" />
+      <div className="figma-native-feature-grid">
+        <HeaderFeatureTile active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
+        <HeaderFeatureTile title="Art Direction" text="Modern minimalism ✨" icon="palette" />
+        <HeaderFeatureTile title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+        <HeaderFeatureTile badge title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
+      </div>
+      <div className="figma-native-menu-cta">
+        <span>
+          <strong>Majin UI Collection</strong>
+          <small>Brought to you by Lunative Studio</small>
+        </span>
+        <button type="button">Get started ↗</button>
+      </div>
+    </div>
+  );
+}
+
+function HeaderMenuLanguage() {
+  const languages = [
+    ["🇮🇩", "Bahasa (ID)", true],
+    ["🇨🇳", "Chinese (CN)", false],
+    ["🇺🇸", "English (EN)", false],
+    ["🇷🇺", "Russian (RU)", false],
+  ] as const;
+
+  return (
+    <div className="figma-header-dropdown-card figma-native-menu figma-native-menu--language">
+      <div className="figma-native-language-title">Language</div>
+      {languages.map(([flag, label, active]) => (
+        <button className={active ? "active" : ""} key={label} type="button">
+          <span>{flag}</span>
+          <strong>{label}</strong>
+          <i />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function HeaderMenuLabel({ variant }: { variant: string }) {
+  return (
+    <div className="figma-native-menu-label">
+      <span>Navigation menu</span>
+      <b>({variant})</b>
+    </div>
+  );
+}
+
+function HeaderMenuItem({
+  active = false,
+  badge = false,
+  icon,
+  text,
+  title,
+}: {
+  active?: boolean;
+  badge?: boolean;
+  icon: string;
+  text: string;
+  title: string;
+}) {
+  return (
+    <div className={`figma-native-menu-item${active ? " active" : ""}`}>
+      <HeaderMenuIcon icon={icon} />
+      <span>
+        <strong>
+          {title}
+          {badge ? <em>New</em> : null}
+        </strong>
+        <small>{text}</small>
+      </span>
+    </div>
+  );
+}
+
+function HeaderFeatureTile({
+  active = false,
+  badge = false,
+  icon,
+  text,
+  title,
+}: {
+  active?: boolean;
+  badge?: boolean;
+  icon: string;
+  text: string;
+  title: string;
+}) {
+  return (
+    <div className={`figma-native-feature-tile${active ? " active" : ""}`}>
+      <HeaderMenuIcon icon={icon} />
+      <strong>
+        {title}
+        {badge ? <em>New</em> : null}
+      </strong>
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function HeaderMenuIcon({ icon }: { icon: string }) {
+  return (
+    <i aria-hidden="true" className={`figma-native-menu-icon figma-native-menu-icon--${icon}`} />
+  );
+}
+
+function HeaderSubmenu() {
+  return (
+    <div className="figma-native-submenu">
+      <small>Submenu label</small>
+      <nav>
+        <span>Art Direction</span>
+        <span>Lifetime Updates <em>New</em></span>
+        <span>Pixel Perfect</span>
+      </nav>
+    </div>
   );
 }
 
@@ -95,16 +279,16 @@ function PageOneScrollFade() {
 function readRoute(): AppRoute {
   const hash = window.location.hash.replace(/^#\/?/, "");
   if (
+    hash === "page-1" ||
     hash === "page-2" ||
     hash === "pricing" ||
     hash === "contact" ||
     hash === "article" ||
-    hash === "kit" ||
-    hash === "dataset-demo"
+    hash === "kit"
   ) {
     return hash;
   }
-  return "page-1";
+  return "kit";
 }
 
 function RawWorkbench() {
@@ -128,7 +312,7 @@ function RawWorkbench() {
       <KitSidebar activeFamily={activeFamily} onFamilyChange={setActiveFamily} />
       <main className="raw-detail-scroll" ref={detailRef}>
         <section className="raw-detail-heading">
-          <span>Forge Homepage Kit</span>
+          <span>Forge Landing Page Kit</span>
           <h1>{activeFamily}</h1>
           <p>
             {activeGroups.length} {detailLabel.toLowerCase()}
@@ -136,7 +320,13 @@ function RawWorkbench() {
         </section>
         <section className="raw-variant-stack" aria-live="polite">
           {activeGroups.map((group, index) => (
-            <RawPreview group={group} index={index} key={group.id} total={activeGroups.length} />
+            <RawPreview
+              code={getGroupCode(group)}
+              group={group}
+              index={index}
+              key={group.id}
+              total={activeGroups.length}
+            />
           ))}
         </section>
       </main>
@@ -165,10 +355,6 @@ function KitSidebar({
         <h1>Kit</h1>
       </div>
       <nav className="raw-family-nav" aria-label="Section families">
-        <a className="raw-demo-link" href="#dataset-demo">
-          <span>Dataset Demo</span>
-          <b>new</b>
-        </a>
         <button
           className={activeFamily === "Pages" ? "active" : ""}
           type="button"
@@ -193,8 +379,35 @@ function KitSidebar({
   );
 }
 
-function RawPreview({ group, index, total }: { group: RawFigmaGroup; index: number; total: number }) {
+function getGroupCode(group: RawFigmaGroup) {
+  const pageIndex = rawPageGroups.findIndex((page) => page.id === group.id);
+  if (pageIndex >= 0) {
+    return `P${String(pageIndex + 1).padStart(3, "0")}`;
+  }
+
+  const sectionIndex = rawSectionGroups.findIndex((section) => section.id === group.id);
+  return `S${String(sectionIndex + 1).padStart(3, "0")}`;
+}
+
+function RawPreview({
+  code,
+  group,
+  index,
+  total,
+}: {
+  code: string;
+  group: RawFigmaGroup;
+  index: number;
+  total: number;
+}) {
   const Component = group.component;
+  const [copied, setCopied] = useState(false);
+
+  const copyCode = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1200);
+  };
 
   return (
     <article className="raw-preview" id={group.id}>
@@ -203,8 +416,17 @@ function RawPreview({ group, index, total }: { group: RawFigmaGroup; index: numb
           <p>
             {index + 1} / {total}
           </p>
-          <h2>{group.variant}</h2>
+          <h2>
+            <span className="raw-preview-code">{code}</span>
+            {group.variant}
+          </h2>
+          <span className="raw-preview-meta">
+            {group.family} · {group.source}
+          </span>
         </div>
+        <button className="raw-copy-code" type="button" onClick={copyCode}>
+          {copied ? "Copied" : "Copy ID"}
+        </button>
       </header>
       <div className="raw-render-frame" style={group.frameHeight ? { height: group.frameHeight } : undefined}>
         <Component />
