@@ -1,85 +1,146 @@
-# Forge Landing Page
+# Forge Landing Page Kit
 
-这是把 Figma 源文件和 Figma 导出的 `md` 源码还原成 React 项目的组件库。每个组件组按用户原始规则处理：一个 JSX 代码片段，加上紧跟在后面的 `// 文案` 和 style 描述，作为同一组 `cssNotes` 元数据保留。
+Figma-first landing page kit for assembling polished product websites with Codex.
 
-注意：`md` 导出会丢真实图片、SVG/vector 和字体加载信息，不能单独作为视觉保真的唯一来源。Figma MCP 是视觉、变量和资产的真源。
+This repository turns the Majin UI Figma export into a traceable React project: finished pages, reusable section variants, local assets, and a Codex skill that can pick components by ID and adapt them for a new business without visually rewriting the design from scratch.
 
-## 技术栈
+## What You Get
 
-- Vite + React + TypeScript
-- `scripts/extract-figma-md.mjs` 从根目录 `*.md` 和 `sections/*.md` 抽取组件组
-- `src/generated/figmaRegistry.tsx` 是自动生成的真实 Figma 组件 registry
-- `src/App.tsx` 默认渲染实际官网页；`#kit` 才是 generated 组件库工作台
-- `src/components/figma-ui-replacements.tsx` 用 DOM/CSS 和真实图片资产补回 md 导出丢失的 UI mockup、icon/vector 和 image-fill 层
-- `src/components/homepage-restoration.tsx` 只用于页面级 overlay 和 Contact map 恢复
-- `images/` 作为 Vite `publicDir` 发布原始图片资产
-- `.agents/skills/landing-page-builder/references/figma-mcp-source.md` 记录 Figma MCP 节点、变量、资产和视觉基准
-- `references/figma-mcp/landing-page-1-1909-17785.png` 是 Figma MCP 导出的 1440x9742 整页视觉基准
-- `.agents/skills/landing-page-builder/references/asset-recovery.md` 记录本地资产回填、Figma crop、结构化 artwork 和路由验收结果
-- `.agents/skills/landing-page-builder` 是给 Codex 使用的官网改造 skill
+- 5 finished page exports: home, alternate home, pricing, contact, and article.
+- 55 section variants grouped by category in `/#kit`.
+- Stable component IDs such as `P001` and `S024` for prompt-based assembly.
+- Figma-exported JSX plus preserved `cssNotes` metadata for text/style traceability.
+- Local restoration assets for avatars, logos, artwork, icons, image fills, and missing vector fragments.
+- `.agents/skills/landing-page-builder`, a Codex skill for business-specific homepage composition.
 
-## 本地运行
+## Preview
+
+Run the dev server and open the kit:
 
 ```bash
 npm install
-npm run extract:figma
 npm run dev
+```
+
+Open:
+
+```text
+http://localhost:5173/#kit
+```
+
+Useful routes:
+
+| Route | Purpose |
+|---|---|
+| `/#kit` | Component and page index. Start here. |
+| `/#page-1` | Restored primary landing page. |
+| `/#page-2` | Alternate landing page. |
+| `/#pricing` | Pricing page. |
+| `/#contact` | Contact page. |
+| `/#article` | Article page. |
+
+## Use With Codex
+
+Use `/#kit` as the visual catalog. Every page and section has a copyable ID:
+
+- `P001`, `P002`, ... for full pages.
+- `S001`, `S002`, ... for section variants.
+
+Example prompt:
+
+```text
+Use P001 as the base. Replace the hero copy for a data quality platform.
+Use S018 for features, S041 for pricing, and S053 for testimonials.
+Keep the Majin visual system, but adapt the content and CTAs to the new product.
+```
+
+For agent work, load the local skill:
+
+```text
+.agents/skills/landing-page-builder
+```
+
+The skill tells Codex how to:
+
+- choose from real Figma-derived pages and sections;
+- preserve `source`, `startLine`, `notesStartLine`, and `cssNotes`;
+- recover missing assets from Figma MCP or local `images/`;
+- avoid screenshot-based rewrites;
+- validate the rendered page in Chrome.
+
+## Project Structure
+
+```text
+.
+├── page-1.md / page-2.md       # Figma-exported finished pages
+├── pricing.md / contact.md     # Figma-exported standalone pages
+├── arcitle.md                  # Figma-exported article page
+├── sections/                   # Figma-exported section groups
+├── scripts/extract-figma-md.mjs # md -> React registry generator
+├── src/generated/figmaRegistry.tsx
+├── src/components/figma-ui-replacements.tsx
+├── src/components/homepage-restoration.tsx
+├── src/App.tsx                 # routes, kit workbench, page rendering
+├── src/styles.css              # visual fixes, kit UI, restoration rules
+├── images/                     # Vite public assets
+├── references/figma-mcp/       # Figma visual baselines
+└── .agents/skills/landing-page-builder
+```
+
+## Development
+
+```bash
+npm run extract:figma
+npm run typecheck
 npm run build
 ```
 
-`npm run build` 会先自动执行 `npm run extract:figma`，保证 generated 组件和 `md` 源码同步。
+`npm run build` runs `extract:figma` first, so generated components stay in sync with the Figma md exports.
 
-## 页面入口
+Current note: Vite prints a Node version warning on Node `22.2.0`; the build still completes. Use Node `20.19+` or `22.12+` to remove the warning.
 
-| URL | 渲染内容 |
-|---|---|
-| `/` | `page-1.md` 生成的完整官网页 |
-| `/#page-2` | `page-2.md` 生成的完整官网页 |
-| `/#pricing` | `pricing.md` 生成的价格页 |
-| `/#contact` | `contact.md` 生成的联系页 |
-| `/#article` | `arcitle.md` 生成的文章页 |
-| `/#kit` | `sections/*.md` 生成的组件库和 cssNotes 查看器 |
+## How The Figma Export Works
 
-## 目录说明
+The source md files contain repeated groups:
 
-| 路径 | 用途 |
-|---|---|
-| `page-1.md`、`page-2.md`、`pricing.md`、`contact.md`、`arcitle.md` | Figma 导出的完整页面源码 |
-| `sections/` | Figma 导出的 section 模块源码 |
-| `scripts/extract-figma-md.mjs` | 抽取“代码 + 后置 cssNotes”并生成 React registry |
-| `src/generated/figmaRegistry.tsx` | 自动生成的页面组件和 section 组件 |
-| `src/App.tsx` | 默认渲染实际页面，`#kit` 渲染组件库 |
-| `src/components/figma-ui-replacements.tsx` | Figma 替换层：真实图片、lucide icon、DOM/CSS mockup、image-fill artwork |
-| `src/components/homepage-restoration.tsx` | 页面级 Figma overlay 和 Contact map 恢复层 |
-| `src/styles.css` | 实际页面 1440px 居中画布、组件库样式 |
-| `.agents/skills/landing-page-builder/references/figma-mcp-source.md` | Figma MCP 真源说明和节点索引 |
-| `references/figma-mcp/landing-page-1-1909-17785.png` | Figma 原始整页视觉基准 |
-| `.agents/skills/landing-page-builder/references/asset-recovery.md` | 本地资产回填、Figma MCP crop、结构化 artwork 和恢复层规则 |
-| `images/figma-crops/` | 从 Figma MCP 节点截图裁出的稳定页面/section 资产 |
-| `images/figma-restoration/` | 用于页面级 overlay 的恢复层资产 |
-| `images/fonts/` | 本地化的 Satoshi 和 Onest 字体 |
-| `.agents/skills/landing-page-builder` | Codex 官网拼装和业务改造 skill |
+1. a JSX-like code block;
+2. followed by `// text` and style notes.
 
-## 改造原则
+`scripts/extract-figma-md.mjs` treats each code block plus its following notes as one component group and writes the result to `src/generated/figmaRegistry.tsx`.
 
-1. Figma MCP 是视觉、变量和资产的真源；原始 `md` 是可编辑结构来源。
-2. 不要按视觉重新手写组件。遇到不匹配时先查 Figma MCP 的 section context 和 screenshot。
-3. 每次改动 `md` 后先运行 `npm run extract:figma`。
-4. Figma 导出的 `lineHeight: 数字` 必须在抽取时转成 `px`，否则 React 会按倍数行高把页面撑爆。
-5. 业务改造优先复制 generated 组件或基于 generated 组件抽参数，不要丢失 `source/startLine/cssNotes`。
-6. `cssNotes` 里的 `// 文案` 与 style 是组件元数据，替换业务文案时先查这里。
-7. `placehold.co`、`#D9D9D9` image-fill 占位和纯色 icon div 是导出缺陷；真实图片用 Figma MCP/`images/` 回填，UI mockup 用结构化 DOM/CSS 替换。
-8. `#kit` 的 section 预览保持 1440px Figma 画布宽度，用来检查模块真实效果。
-9. 完成后运行 `npm run typecheck`、`npm run build`，再用 Chrome 插件检查整页和 section 渲染。
+Do not edit `src/generated/figmaRegistry.tsx` by hand. Change the source md or the extractor, then rerun:
 
-## 当前验收
+```bash
+npm run extract:figma
+```
 
-2026-06-17 当前状态：
+## Restoration Rules
 
-- `src/generated/figmaRegistry.tsx` 和 `dist/` 均无 `placehold.co`。
-- `npm run typecheck` 通过。
-- `npm run build` 通过；当前 Node.js `22.2.0` 会触发 Vite 版本提示，生产包仍成功生成。
-- Chrome 插件实测 `/`、`/#page-2`、`/#pricing`、`/#contact`、`/#article`、`/#kit` 均为 `0` 个 `placehold.co`、`0` 个断图。
-- Chrome 插件逐个切换 `#kit` 的 14 个 section family，全部为 `0` 个 `placehold.co`、`0` 个断图。
-- Chrome 插件逐个切换 `#kit` 的 14 个 section family，全部为 `0` 个 UI mockup crop、`0` 个可见大灰块、`0` 个可见小灰块、`0` 个 tiny outline 碎片。
-- `Project Lazarus` 和同类 UI mockup 不再用整图截图覆盖；md 结构化 DOM 保留，缺失 image-fill 层由 `FigmaGeneratedArtwork` 渲染。
+Figma md export is incomplete by itself. It can lose image fills, SVG/vector layers, font loading, and some icon masks. This project restores those gaps through:
+
+- `src/components/figma-ui-replacements.tsx` for structured replacements such as logos, flags, glyphs, UI mockups, and generated artwork;
+- `src/components/homepage-restoration.tsx` for page-level overlays that should not replace the generated component tree;
+- `images/figma-crops/` and `images/figma-restoration/` for stable local assets;
+- `references/figma-mcp/landing-page-1-1909-17785.png` as the page-level visual baseline.
+
+When something looks wrong, use Figma MCP and the original md source first. Do not approximate the design from screenshots.
+
+## Maintainer Checklist
+
+Before committing UI changes:
+
+1. Run `npm run typecheck`.
+2. Run `npm run build`.
+3. Open the app in Chrome.
+4. Check `/#page-1`, `/#page-2`, `/#pricing`, `/#contact`, `/#article`, and `/#kit`.
+5. In `/#kit`, switch through every category and confirm there are no broken images, placeholder blocks, or abnormal square icon fragments.
+
+## Prior Art
+
+This README follows the same high-level pattern used by popular UI libraries:
+
+- shadcn/ui: customizable source-first components and documentation-first entry point.
+- Magic UI: copy/adapt components for product experiences.
+- Headless UI and Chakra UI: clear value proposition, installation, documentation, and contribution paths.
+
+This project is different in one important way: Figma MCP and the md export are the source of truth. The React project is a recoverable, traceable implementation layer for Codex-assisted landing page assembly.
