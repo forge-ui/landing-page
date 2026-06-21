@@ -1,146 +1,148 @@
 # Forge Landing Page Kit
 
-Figma-first landing page kit for assembling polished product websites with Codex.
+面向官网搭建的页面与组件套件。项目已经把成品页面、区块组件、视觉资产和 Codex 使用说明整理成可直接运行、可预览、可按编号复用的代码工程。
 
-This repository turns the Majin UI Figma export into a traceable React project: finished pages, reusable section variants, local assets, and a Codex skill that can pick components by ID and adapt them for a new business without visually rewriting the design from scratch.
+它的核心目标很简单：当你有一个新业务说明时，Codex 可以先打开组件索引，按编号选择页面和区块，再替换文案、产品信息、CTA 和素材，快速拼出一套风格统一的官网。
 
-## What You Get
+## 项目定位
 
-- 5 finished page exports: home, alternate home, pricing, contact, and article.
-- 55 section variants grouped by category in `/#kit`.
-- Stable component IDs such as `P001` and `S024` for prompt-based assembly.
-- Figma-exported JSX plus preserved `cssNotes` metadata for text/style traceability.
-- Local restoration assets for avatars, logos, artwork, icons, image fills, and missing vector fragments.
-- `.agents/skills/landing-page-builder`, a Codex skill for business-specific homepage composition.
+- 不是营销落地页截图合集，而是可运行的 React 组件工程。
+- 不是一次性 demo，而是可持续复用的官网页面素材库。
+- 不是让 Codex 凭感觉重写页面，而是让 Codex 基于现有编号组件做组合和改造。
+- 入口统一为组件索引页，用户可以复制编号直接下达生成指令。
 
-## Preview
+更多背景见 [ABOUT.md](./ABOUT.md)。
 
-Run the dev server and open the kit:
+## 你能拿到什么
+
+- 5 个成品页面：主页、备用主页、价格页、联系页、文章页。
+- 55 个区块组件，按导航、Hero、特性、价格、评价、FAQ、CTA 等分类组织。
+- 稳定编号：`P001`、`P002` 表示页面，`S001`、`S002` 表示区块。
+- 本地视觉资产：头像、Logo、产品界面、装饰图形、图标和页面插图。
+- 官网生成 Skill：`.agents/skills/landing-page-builder`，用于指导 Codex 根据业务说明拼装官网。
+
+## 快速开始
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open:
+打开：
 
 ```text
 http://localhost:5173/#kit
 ```
 
-Useful routes:
+`#kit` 是默认工作入口，包含页面和组件的分类索引、预览和编号。
 
-| Route | Purpose |
+## 页面入口
+
+| 路由 | 内容 |
 |---|---|
-| `/#kit` | Component and page index. Start here. |
-| `/#page-1` | Restored primary landing page. |
-| `/#page-2` | Alternate landing page. |
-| `/#pricing` | Pricing page. |
-| `/#contact` | Contact page. |
-| `/#article` | Article page. |
+| `/#kit` | 页面与组件索引，建议从这里开始 |
+| `/#page-1` | 成品主页 1 |
+| `/#page-2` | 成品主页 2 |
+| `/#pricing` | 价格页 |
+| `/#contact` | 联系页 |
+| `/#article` | 文章页 |
 
-## Use With Codex
+## 如何让 Codex 使用
 
-Use `/#kit` as the visual catalog. Every page and section has a copyable ID:
+先打开 `http://localhost:5173/#kit`，找到适合的页面或区块编号，然后把编号写进需求里。
 
-- `P001`, `P002`, ... for full pages.
-- `S001`, `S002`, ... for section variants.
-
-Example prompt:
+示例：
 
 ```text
-Use P001 as the base. Replace the hero copy for a data quality platform.
-Use S018 for features, S041 for pricing, and S053 for testimonials.
-Keep the Majin visual system, but adapt the content and CTAs to the new product.
+用 P001 作为基础页面。
+Hero 保持当前布局，文案改成数据质量平台。
+特性区使用 S018，价格区使用 S041，客户评价使用 S053。
+整体保持轻量、克制、专业的 SaaS 官网风格。
 ```
 
-For agent work, load the local skill:
+如果要让 Codex 按项目规范长期工作，让它读取：
 
 ```text
 .agents/skills/landing-page-builder
 ```
 
-The skill tells Codex how to:
+Skill 会约束 Codex：
 
-- choose from real Figma-derived pages and sections;
-- preserve `source`, `startLine`, `notesStartLine`, and `cssNotes`;
-- recover missing assets from Figma MCP or local `images/`;
-- avoid screenshot-based rewrites;
-- validate the rendered page in Chrome.
+- 优先使用已有页面和区块编号；
+- 不要把组件改成截图；
+- 遇到缺失图标、头像、Logo 或产品图时，优先从本地资产补齐；
+- 改完页面后必须在浏览器里实际检查；
+- 保持官网风格统一，不做炫技式动效。
 
-## Project Structure
+## 目录结构
 
 ```text
 .
-├── page-1.md / page-2.md       # Figma-exported finished pages
-├── pricing.md / contact.md     # Figma-exported standalone pages
-├── arcitle.md                  # Figma-exported article page
-├── sections/                   # Figma-exported section groups
-├── scripts/extract-figma-md.mjs # md -> React registry generator
-├── src/generated/figmaRegistry.tsx
-├── src/components/figma-ui-replacements.tsx
-├── src/components/homepage-restoration.tsx
-├── src/App.tsx                 # routes, kit workbench, page rendering
-├── src/styles.css              # visual fixes, kit UI, restoration rules
-├── images/                     # Vite public assets
-├── references/figma-mcp/       # Figma visual baselines
+├── page-1.md / page-2.md       # 成品主页源码
+├── pricing.md / contact.md     # 独立页面源码
+├── arcitle.md                  # 文章页源码
+├── sections/                   # 区块组件源码
+├── scripts/                    # 组件抽取与生成脚本
+├── src/App.tsx                 # 路由、索引页、页面渲染入口
+├── src/components/             # 页面修复层、结构化 UI 组件、业务组件
+├── src/data/siteKit.ts         # 页面与区块编号目录
+├── src/styles.css              # 页面样式、索引页样式、视觉修复规则
+├── images/                     # 本地图片、头像、Logo、插图和界面资产
 └── .agents/skills/landing-page-builder
 ```
 
-## Development
+## 开发命令
 
 ```bash
-npm run extract:figma
 npm run typecheck
 npm run build
 ```
 
-`npm run build` runs `extract:figma` first, so generated components stay in sync with the Figma md exports.
-
-Current note: Vite prints a Node version warning on Node `22.2.0`; the build still completes. Use Node `20.19+` or `22.12+` to remove the warning.
-
-## How The Figma Export Works
-
-The source md files contain repeated groups:
-
-1. a JSX-like code block;
-2. followed by `// text` and style notes.
-
-`scripts/extract-figma-md.mjs` treats each code block plus its following notes as one component group and writes the result to `src/generated/figmaRegistry.tsx`.
-
-Do not edit `src/generated/figmaRegistry.tsx` by hand. Change the source md or the extractor, then rerun:
+日常开发使用：
 
 ```bash
-npm run extract:figma
+npm run dev
 ```
 
-## Restoration Rules
+当前项目使用 Vite + React + TypeScript。构建时如果本机 Node 版本过低，Vite 可能会提示升级；建议使用 Node `20.19+` 或 `22.12+`。
 
-Figma md export is incomplete by itself. It can lose image fills, SVG/vector layers, font loading, and some icon masks. This project restores those gaps through:
+## 组件编号规则
 
-- `src/components/figma-ui-replacements.tsx` for structured replacements such as logos, flags, glyphs, UI mockups, and generated artwork;
-- `src/components/homepage-restoration.tsx` for page-level overlays that should not replace the generated component tree;
-- `images/figma-crops/` and `images/figma-restoration/` for stable local assets;
-- `references/figma-mcp/landing-page-1-1909-17785.png` as the page-level visual baseline.
+| 前缀 | 含义 | 示例 |
+|---|---|---|
+| `P` | 成品页面 | `P001` |
+| `S` | 区块组件 | `S024` |
 
-When something looks wrong, use Figma MCP and the original md source first. Do not approximate the design from screenshots.
+编号是给人和 Codex 共同使用的稳定索引。后续新增页面或组件时，不要复用旧编号；已有编号对应的视觉和功能含义应尽量保持稳定。
 
-## Maintainer Checklist
+## 改造原则
 
-Before committing UI changes:
+1. 先选编号，再改业务内容。
+2. 优先改文案、数据、CTA、图片和主题变量，不要重写结构。
+3. 组件可以组合，但不要把完整页面拆成不可维护的大段临时代码。
+4. 图标、Logo、头像和产品图必须清晰，不要使用模糊位图或占位方块。
+5. 动效保持克制，优先使用每屏淡入淡出、轻微位移和基础 hover 状态。
+6. 改完视觉相关内容后，必须打开浏览器检查真实页面。
 
-1. Run `npm run typecheck`.
-2. Run `npm run build`.
-3. Open the app in Chrome.
-4. Check `/#page-1`, `/#page-2`, `/#pricing`, `/#contact`, `/#article`, and `/#kit`.
-5. In `/#kit`, switch through every category and confirm there are no broken images, placeholder blocks, or abnormal square icon fragments.
+## 维护检查清单
 
-## Prior Art
+提交前至少检查：
 
-This README follows the same high-level pattern used by popular UI libraries:
+1. `npm run typecheck`
+2. `npm run build`
+3. 打开 `http://localhost:5173/#kit`
+4. 检查 `/#page-1`、`/#page-2`、`/#pricing`、`/#contact`、`/#article`
+5. 在 `/#kit` 切换所有分类，确认没有断图、灰色占位、异常方块和模糊 Logo
 
-- shadcn/ui: customizable source-first components and documentation-first entry point.
-- Magic UI: copy/adapt components for product experiences.
-- Headless UI and Chakra UI: clear value proposition, installation, documentation, and contribution paths.
+## 适合的使用场景
 
-This project is different in one important way: Figma MCP and the md export are the source of truth. The React project is a recoverable, traceable implementation layer for Codex-assisted landing page assembly.
+- SaaS 官网
+- AI 产品官网
+- 数据平台官网
+- 开发者工具官网
+- 企业服务官网
+- 产品发布页
+
+## License
+
+当前仓库为 Forge UI 内部组件套件。对外授权策略以后续仓库配置为准。
