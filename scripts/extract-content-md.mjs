@@ -3,22 +3,22 @@ import path from "node:path";
 
 const root = process.cwd();
 const generatedDir = path.join(root, "src/generated");
-const outputFile = path.join(generatedDir, "figmaRegistry.tsx");
+const outputFile = path.join(generatedDir, "siteRegistry.tsx");
 
 const pageSources = [
-  { file: "page-1.md", title: "Demo Page 1" },
-  { file: "page-2.md", title: "Demo Page 2" },
-  { file: "pricing.md", title: "Pricing Page" },
-  { file: "contact.md", title: "Contact Page" },
-  { file: "arcitle.md", title: "Article Page" },
+  { file: "content/pages/page-1.md", title: "Demo Page 1" },
+  { file: "content/pages/page-2.md", title: "Demo Page 2" },
+  { file: "content/pages/pricing.md", title: "Pricing Page" },
+  { file: "content/pages/contact.md", title: "Contact Page" },
+  { file: "content/pages/article.md", title: "Article Page" },
 ];
 
 const sectionSources = fs
-  .readdirSync(path.join(root, "sections"))
+  .readdirSync(path.join(root, "content/sections"))
   .filter((file) => file.endsWith(".md"))
   .sort((a, b) => a.localeCompare(b, "en"))
   .map((file) => ({
-    file: `sections/${file}`,
+    file: `content/sections/${file}`,
     title: titleCase(file.replace(/\.md$/, "")),
   }));
 
@@ -88,7 +88,7 @@ const placeholderAssets = {
 };
 
 const scopedPlaceholderAssets = {
-  "page-1.md#1": {
+  "content/pages/page-1.md#1": {
     "486x486": [
       "figma-crops/landing-page-1/01-hero-visual-486x486.png",
       "figma-crops/landing-page-1/02-content-right-visual-486x486.png",
@@ -103,12 +103,12 @@ const scopedPlaceholderAssets = {
       "figma-crops/landing-page-1/07-blog-card-3-384x328.png",
     ],
   },
-  "contact.md#1": {
+  "content/pages/contact.md#1": {
     "478x444": [
       "figma-crops/contact-4/contact-map-layer-478x444.png",
     ],
   },
-  "sections/blog.md#1": {
+  "content/sections/blog.md#1": {
     "384x328": [
       "figma-crops/blog-1/card-1-384x328.png",
       "figma-crops/blog-1/card-1-384x328.png",
@@ -118,7 +118,7 @@ const scopedPlaceholderAssets = {
       "figma-crops/blog-1/card-3-384x328.png",
     ],
   },
-  "sections/blog.md#2": {
+  "content/sections/blog.md#2": {
     "282x282": [
       "figma-crops/blog-2/card-1-282x282.png",
       "figma-crops/blog-2/card-1-282x282.png",
@@ -130,7 +130,7 @@ const scopedPlaceholderAssets = {
       "figma-crops/blog-2/card-4-282x282.png",
     ],
   },
-  "sections/blog.md#3": {
+  "content/sections/blog.md#3": {
     "588x312": [
       "figma-crops/blog-3/featured-588x312.png",
       "figma-crops/blog-3/featured-588x312.png",
@@ -142,7 +142,7 @@ const scopedPlaceholderAssets = {
       "figma-crops/blog-3/card-2-282x282.png",
     ],
   },
-  "sections/bento.md#2": {
+  "content/sections/bento.md#2": {
     "368x320": [
       "figma-crops/bento-3/card-1-368x320.png",
       "figma-crops/bento-3/card-2-368x320.png",
@@ -153,23 +153,23 @@ const scopedPlaceholderAssets = {
       "figma-crops/bento-3/card-5-572x320.png",
     ],
   },
-  "sections/call to action.md#1": {
+  "content/sections/call to action.md#1": {
     "486x320": [
       "figma-crops/cta-1/card-1-486x320.png",
       "figma-crops/cta-1/card-2-486x320.png",
     ],
   },
-  "sections/call to action.md#3": {
+  "content/sections/call to action.md#3": {
     "486x320": [
       "figma-crops/cta-3/visual-486x320.png",
     ],
   },
-  "sections/call to action.md#4": {
+  "content/sections/call to action.md#4": {
     "504x384": [
       "figma-crops/cta-4/visual-504x384.png",
     ],
   },
-  "sections/contact.md#1": {
+  "content/sections/contact.md#1": {
     "486x444": [
       "figma-crops/contact-1/map-maker-surakarta.png",
       "figma-crops/contact-1/clouds.png",
@@ -178,22 +178,22 @@ const scopedPlaceholderAssets = {
       "figma-crops/contact-1/noise-texture.png",
     ],
   },
-  "sections/contact.md#4": {
+  "content/sections/contact.md#4": {
     "478x444": [
       "figma-crops/contact-4/contact-map-layer-478x444.png",
     ],
   },
-  "sections/content.md#1": {
+  "content/sections/content.md#1": {
     "486x486": [
       "figma-crops/content-1/visual-486x486.png",
     ],
   },
-  "sections/content.md#2": {
+  "content/sections/content.md#2": {
     "486x486": [
       "figma-crops/content-2/visual-486x486.png",
     ],
   },
-  "sections/content.md#3": {
+  "content/sections/content.md#3": {
     "272x120": [
       "figma-crops/content-3/card-1-272x120.png",
       "figma-crops/content-3/card-2-272x120.png",
@@ -203,12 +203,12 @@ const scopedPlaceholderAssets = {
       "figma-crops/content-3/card-6-272x120.png",
     ],
   },
-  "sections/header.md#1": {
+  "content/sections/header.md#1": {
     "486x486": [
       "figma-crops/header-1/hero-486x486.png",
     ],
   },
-  "sections/header.md#2": {
+  "content/sections/header.md#2": {
     "27x27": [
       "figma-crops/header-2/icon-27x27.png",
       "figma-crops/header-2/transparent-27x27.png",
@@ -221,12 +221,12 @@ const scopedPlaceholderAssets = {
       "figma-crops/header-2/wide-1184x248.png",
     ],
   },
-  "sections/header.md#3": {
+  "content/sections/header.md#3": {
     "384x384": [
       "figma-crops/header-3/visual-384x384.png",
     ],
   },
-  "sections/navigation menu.md#2": {
+  "content/sections/navigation menu.md#2": {
     "208x128": [
       "figma-crops/navigation-menu-2/card-image-208x128.png",
     ],
@@ -238,7 +238,7 @@ const scopedPlaceholderAssets = {
       "Avatars/3d_avatar_21.png",
     ],
   },
-  "sections/pricing.md#1": {
+  "content/sections/pricing.md#1": {
     "384x100": [
       "figma-crops/pricing-1/overlay-384x100.png",
     ],
@@ -248,18 +248,18 @@ const scopedPlaceholderAssets = {
 const companyLogoIds = new Set(["1", "2", "3", "4", "5"]);
 
 const droppedOverlayPlaceholders = {
-  "page-1.md#1": new Set(["486x486", "504x384"]),
-  "sections/bento.md#2": new Set(["368x320", "572x320"]),
-  "sections/call to action.md#1": new Set(["486x320"]),
-  "sections/call to action.md#3": new Set(["486x320"]),
-  "sections/call to action.md#4": new Set(["504x384"]),
-  "sections/content.md#1": new Set(["486x486"]),
-  "sections/content.md#2": new Set(["486x486"]),
-  "sections/content.md#3": new Set(["272x120"]),
-  "sections/header.md#1": new Set(["486x486"]),
-  "sections/header.md#2": new Set(["304x181", "1184x248"]),
-  "sections/header.md#3": new Set(["384x384"]),
-  "sections/navigation menu.md#2": new Set(["208x128", "203x120"]),
+  "content/pages/page-1.md#1": new Set(["486x486", "504x384"]),
+  "content/sections/bento.md#2": new Set(["368x320", "572x320"]),
+  "content/sections/call to action.md#1": new Set(["486x320"]),
+  "content/sections/call to action.md#3": new Set(["486x320"]),
+  "content/sections/call to action.md#4": new Set(["504x384"]),
+  "content/sections/content.md#1": new Set(["486x486"]),
+  "content/sections/content.md#2": new Set(["486x486"]),
+  "content/sections/content.md#3": new Set(["272x120"]),
+  "content/sections/header.md#1": new Set(["486x486"]),
+  "content/sections/header.md#2": new Set(["304x181", "1184x248"]),
+  "content/sections/header.md#3": new Set(["384x384"]),
+  "content/sections/navigation menu.md#2": new Set(["208x128", "203x120"]),
 };
 
 const groups = sources.flatMap((source) => extractGroups(source));
@@ -268,7 +268,7 @@ fs.mkdirSync(generatedDir, { recursive: true });
 fs.writeFileSync(outputFile, renderRegistry(groups));
 
 const orphanCount = groups.filter((group) => group.orphanBefore.length > 0).length;
-console.log(`Extracted ${groups.length} Figma md groups into ${path.relative(root, outputFile)}.`);
+console.log(`Extracted ${groups.length} site md groups into ${path.relative(root, outputFile)}.`);
 if (orphanCount > 0) {
   console.log(`Preserved orphan cssNotes before ${orphanCount} groups as orphanBefore metadata.`);
 }
@@ -351,14 +351,14 @@ function count(value, pattern) {
 
 function sanitizeJsx(code, sourceFile, groupIndex) {
   const jsx = dropGeneratedArtworkGlowBlocks(
-    replaceFigmaFragmentIconGroups(
+    replaceSiteFragmentIconGroups(
       replaceFigmaVectorArtifacts(
-        replaceFigmaCropImages(
-          restoreFigmaCropOpacity(
-            replaceFigmaFlagGroups(
+        replaceSiteCropImages(
+          restoreSiteCropOpacity(
+            replaceSiteFlagGroups(
               replaceCompanyLogoBlocks(
                 removeScrollDownExploreBlocks(
-                  replaceKnownPlaceholders(dropFigmaOverlayPlaceholders(code, sourceFile, groupIndex), sourceFile, groupIndex),
+                  replaceKnownPlaceholders(dropSiteOverlayPlaceholders(code, sourceFile, groupIndex), sourceFile, groupIndex),
                 ),
               ),
             ),
@@ -387,11 +387,11 @@ function dropGeneratedArtworkGlowBlocks(code) {
     );
 }
 
-function dropFigmaOverlayPlaceholders(code, sourceFile, groupIndex) {
+function dropSiteOverlayPlaceholders(code, sourceFile, groupIndex) {
   return code.replace(
     /<img style={{([^}]*)}} src="https:\/\/placehold\.co\/(\d+x\d+)" \/>/g,
     (match, style, size) => {
-      if (!shouldDropFigmaOverlay(sourceFile, groupIndex, size, style)) {
+      if (!shouldDropSiteOverlay(sourceFile, groupIndex, size, style)) {
         return match;
       }
 
@@ -400,7 +400,7 @@ function dropFigmaOverlayPlaceholders(code, sourceFile, groupIndex) {
   );
 }
 
-function shouldDropFigmaOverlay(sourceFile, groupIndex, size, style) {
+function shouldDropSiteOverlay(sourceFile, groupIndex, size, style) {
   const scopedDropSizes = droppedOverlayPlaceholders[`${sourceFile}#${groupIndex}`];
   if (!scopedDropSizes?.has(size)) {
     return false;
@@ -432,11 +432,11 @@ function publicAssetPath(assetPath) {
   return encodeURI(`/${assetPath}`);
 }
 
-function restoreFigmaCropOpacity(code) {
+function restoreSiteCropOpacity(code) {
   return code.replace(
     /<img style={{([^}]*)}} src="(\/figma-crops\/[^"]+)"/g,
     (_, style, src) => {
-      if (shouldKeepFigmaCropOpacity(src)) {
+      if (shouldKeepSiteCropOpacity(src)) {
         return `<img style={{${style}}} src="${src}"`;
       }
 
@@ -450,13 +450,13 @@ function restoreFigmaCropOpacity(code) {
   );
 }
 
-function shouldKeepFigmaCropOpacity(src) {
+function shouldKeepSiteCropOpacity(src) {
   return [
     "/figma-crops/contact-1/noise-texture.png",
   ].includes(src);
 }
 
-function replaceFigmaCropImages(code) {
+function replaceSiteCropImages(code) {
   return code.replace(
     /<img style={{([^}]*)}} src="(\/figma-crops\/[^"]+)" \/>/g,
     (_, style, src) => `<FigmaUiReplacement src="${src}" style={{${style}}} />`,
@@ -505,7 +505,7 @@ function replaceFigmaVectorArtifacts(code) {
   });
 }
 
-function replaceFigmaFragmentIconGroups(code) {
+function replaceSiteFragmentIconGroups(code) {
   const hiddenVectorSpan = `<span aria-hidden="true" data-figma-vector-artifact="true" style={{display: 'none'}} />`;
   const hiddenVectorGroupPattern = String.raw`<div style={{width: 20, height: 20, position: 'relative', overflow: 'hidden'}}>\s*(?:${escapeRegExp(hiddenVectorSpan)}\s*){5}</div>`;
 
@@ -515,7 +515,7 @@ function replaceFigmaFragmentIconGroups(code) {
   );
 }
 
-function replaceFigmaFlagGroups(code) {
+function replaceSiteFlagGroups(code) {
   return code
     .replace(flagPattern(16, [
       "width: 16, height: 16, left: 0, top: 0, position: 'absolute'",
@@ -866,19 +866,19 @@ ${indent(group.code, 4)}
     })
     .join(",\n");
 
-  return `/* This file is generated by scripts/extract-figma-md.mjs. */
+  return `/* This file is generated by scripts/extract-content-md.mjs. */
 /* eslint-disable */
 // @ts-nocheck
 
 import type { ComponentType } from "react";
 import { FigmaCompanyLogo, FigmaDecorativeShape, FigmaFlagGlyph, FigmaGeneratedArtwork, FigmaIconGlyph, FigmaUiReplacement, FigmaVectorGlyph } from "../components/figma-ui-replacements";
 
-export type RawFigmaTextStyle = {
+export type RawSiteTextStyle = {
   text: string;
   style: string;
 };
 
-export type RawFigmaGroup = {
+export type RawSiteGroup = {
   id: string;
   source: string;
   sourceKind: "page" | "section";
@@ -891,18 +891,18 @@ export type RawFigmaGroup = {
   frameHeight: number | null;
   cssNotes: string;
   orphanBefore: string;
-  textStyles: RawFigmaTextStyle[];
+  textStyles: RawSiteTextStyle[];
   component: ComponentType;
 };
 
 ${components}
 
-export const rawFigmaGroups: RawFigmaGroup[] = [
+export const rawSiteGroups: RawSiteGroup[] = [
 ${registry}
 ];
 
-export const rawPageGroups = rawFigmaGroups.filter((group) => group.sourceKind === "page");
-export const rawSectionGroups = rawFigmaGroups.filter((group) => group.sourceKind === "section");
+export const rawPageGroups = rawSiteGroups.filter((group) => group.sourceKind === "page");
+export const rawSectionGroups = rawSiteGroups.filter((group) => group.sourceKind === "section");
 export const rawSectionFamilies = Array.from(new Set(rawSectionGroups.map((group) => group.family)));
 `;
 }

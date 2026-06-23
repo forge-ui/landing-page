@@ -1,17 +1,16 @@
-# Forge Homepage Agent Rules
+# Forge Landing Page Kit Agent Rules
 
-本仓是 Forge UI 官网模块库项目，源码来自 Figma 导出的页面和 section。处理任务时默认使用 `.agents/skills/forge-homepage-builder`。
+本仓是 Forge UI 官网页面与组件套件。处理官网拼装、业务改造、页面预览或组件维护任务时，默认读取并使用 `.agents/skills/landing-page-builder`。
 
 ## 工作规则
 
 - 始终用简体中文回复。
-- 不要删除或移动根目录 Figma 导出文件，除非用户明确要求。
-- 不要把 `page-*.md` 或 `sections/*.md` 当运行时代码直接嵌入页面；它们是设计来源和核验参考。
-- 基础 UI 组件放在 `src/components/base.tsx`。
-- 官网 section 模块放在 `src/components/sections.tsx`，通过 `renderSection()` 按 family/variant 渲染。
-- 模块默认内容、variant catalog 放在 `src/data/siteKit.ts`。
-- Figma 成品页组合蓝图放在 `src/data/demoPages.ts`。
-- `src/App.tsx` 是模块工作台，用于查看 demo 页面和模块库，不是最终业务官网的一次性静态页。
-- 视觉 token、响应式、hover/focus 状态集中改 `src/styles.css`。
-- 不要在未获用户明确要求时执行 `git commit`、`git push`、分支操作或破坏性清理。
-- 完成改动后至少运行 `npm run typecheck` 和 `npm run build`。如果本机 Node 满足 pnpm 要求，也可以运行 `pnpm typecheck` / `pnpm build`。
+- 默认入口是 `http://localhost:5173/#kit`；页面预览路由是 `#page-1`、`#page-2`、`#pricing`、`#contact`、`#article`。
+- 页面与组件源码统一放在 `content/pages/*.md` 和 `content/sections/*.md`。
+- `scripts/extract-content-md.mjs` 负责从内容源生成 `src/generated/siteRegistry.tsx`；不要手写修改 generated registry。
+- `src/App.tsx` 负责文档站壳子、组件索引、页面路由和页面预览。
+- `src/components/*replacements.tsx` 与 `src/components/homepage-restoration.tsx` 是当前运行时视觉修复层；修改前先确认依赖关系。
+- `images/` 是 Vite `publicDir`，用于本地图片、头像、Logo、字体和页面资产；删除资产前必须确认没有运行时引用。
+- 视觉 token、响应式、hover/focus、组件索引和页面修复样式集中改 `src/styles.css`。
+- 不要在未获用户明确要求时执行 `git commit`、`git push`、建分支或破坏性清理。
+- 前端视觉相关改动完成后，必须运行 `npm run typecheck`、`npm run build`，并用用户本机 Google Chrome 打开真实页面检查。

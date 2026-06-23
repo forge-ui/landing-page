@@ -11,8 +11,6 @@
 - 引导 Codex 基于现有编号组件做组合和改造，保持页面质量和风格一致。
 - 入口统一为组件索引页，用户可以复制编号直接下达生成指令。
 
-更多背景见 [ABOUT.md](./ABOUT.md)。
-
 ## 你能拿到什么
 
 - 5 个成品页面：主页、备用主页、价格页、联系页、文章页。
@@ -78,14 +76,14 @@ Skill 会约束 Codex：
 
 ```text
 .
-├── page-1.md / page-2.md       # 成品主页源码
-├── pricing.md / contact.md     # 独立页面源码
-├── arcitle.md                  # 文章页源码
-├── sections/                   # 区块组件源码
+├── content/pages/page-1.md / content/pages/page-2.md       # 成品主页源码
+├── content/pages/pricing.md / content/pages/contact.md     # 独立页面源码
+├── content/pages/article.md                  # 文章页源码
+├── content/sections/                   # 区块组件源码
 ├── scripts/                    # 组件抽取与生成脚本
 ├── src/App.tsx                 # 路由、索引页、页面渲染入口
-├── src/components/             # 页面修复层、结构化 UI 组件、业务组件
-├── src/data/siteKit.ts         # 页面与区块编号目录
+├── src/components/             # 页面修复层和结构化 UI 组件
+├── src/generated/              # 自动生成的页面与区块 registry
 ├── src/styles.css              # 页面样式、索引页样式、视觉修复规则
 ├── images/                     # 本地图片、头像、Logo、插图和界面资产
 └── .agents/skills/landing-page-builder

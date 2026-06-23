@@ -1,4 +1,4 @@
-/* This file is generated from Figma MCP screenshot recovery data. */
+/* This file is generated from local screenshot recovery data. */
 export type Page1RestorationAsset = {
   height: number;
   name: string;

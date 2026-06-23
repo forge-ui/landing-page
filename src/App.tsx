@@ -3,8 +3,8 @@ import {
   rawPageGroups,
   rawSectionFamilies,
   rawSectionGroups,
-  type RawFigmaGroup,
-} from "./generated/figmaRegistry";
+  type RawSiteGroup,
+} from "./generated/siteRegistry";
 import { ContactRestoration, HomepageRestoration } from "./components/homepage-restoration";
 
 type PageRoute = "page-1" | "page-2" | "pricing" | "contact" | "article";
@@ -12,12 +12,16 @@ type AppRoute = PageRoute | "kit";
 type KitCategory = "Pages" | string;
 
 const pageRoutes: Record<PageRoute, string> = {
-  "page-1": "page-1.md",
-  "page-2": "page-2.md",
-  pricing: "pricing.md",
-  contact: "contact.md",
-  article: "arcitle.md",
+  "page-1": "content/pages/page-1.md",
+  "page-2": "content/pages/page-2.md",
+  pricing: "content/pages/pricing.md",
+  contact: "content/pages/contact.md",
+  article: "content/pages/article.md",
 };
+
+const pageRouteBySource = Object.fromEntries(
+  Object.entries(pageRoutes).map(([route, source]) => [source, route]),
+) as Record<string, PageRoute>;
 
 function App() {
   const [route, setRoute] = useState<AppRoute>(() => readRoute());
@@ -41,15 +45,17 @@ function App() {
   return (
     <main className="figma-page-host" data-source={page.source}>
       <Page />
-      {page.source === "page-1.md" || page.source === "page-2.md" ? <FigmaHeaderDropdowns /> : null}
-      {page.source === "page-1.md" ? <HomepageRestoration /> : null}
-      {page.source === "contact.md" ? <ContactRestoration /> : null}
-      {page.source === "page-1.md" ? <PageOneScrollFade /> : null}
+      {page.source === "content/pages/page-1.md" || page.source === "content/pages/page-2.md" ? <SiteHeaderDropdowns /> : null}
+      {page.source === "content/pages/page-1.md" ? <HomepageRestoration /> : null}
+      {page.source === "content/pages/contact.md" ? <ContactRestoration /> : null}
+      {page.source === "content/pages/page-1.md" || page.source === "content/pages/page-2.md" ? (
+        <PageScrollEffects source={page.source} />
+      ) : null}
     </main>
   );
 }
 
-function FigmaHeaderDropdowns() {
+function SiteHeaderDropdowns() {
   return (
     <div className="figma-header-dropdown-layer" aria-label="Header dropdown menus">
       <div className="figma-header-dropdown-trigger figma-header-dropdown-trigger--why" tabIndex={0}>
@@ -74,7 +80,7 @@ function HeaderMenuVariantOne() {
       <HeaderMenuLabel variant="variant one" />
       <div className="figma-native-menu-panel">
         <HeaderMenuItem active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
-        <HeaderMenuItem title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+        <HeaderMenuItem title="What's Included" text="Pages, sections, assets, and prompts 🎁" icon="gift" />
         <HeaderMenuItem title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
         <HeaderSubmenu />
       </div>
@@ -89,9 +95,9 @@ function HeaderMenuVariantTwo() {
         <HeaderMenuLabel variant="variant two" />
         <div className="figma-native-menu-panel">
           <HeaderMenuItem active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
-          <HeaderMenuItem title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+          <HeaderMenuItem title="What's Included" text="Pages, sections, assets, and prompts 🎁" icon="gift" />
           <HeaderMenuItem badge title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
-          <HeaderMenuItem title="Free Updates" text="Lifetime Figma update for free 🎉" icon="spark" />
+          <HeaderMenuItem title="Reusable Kit" text="Stable component IDs for Codex 🎉" icon="spark" />
           <HeaderMenuItem title="Art Direction" text="Modern minimalism ✨" icon="palette" />
           <HeaderSubmenu />
         </div>
@@ -118,7 +124,7 @@ function HeaderMenuVariantThree() {
       <div className="figma-native-feature-grid">
         <HeaderFeatureTile active badge title="Why Majin?" text="Foundational components system ⚙️" icon="gear" />
         <HeaderFeatureTile title="Art Direction" text="Modern minimalism ✨" icon="palette" />
-        <HeaderFeatureTile title="What's Included" text="You'll receive the Figma file (.fig) 🎁" icon="gift" />
+        <HeaderFeatureTile title="What's Included" text="Pages, sections, assets, and prompts 🎁" icon="gift" />
         <HeaderFeatureTile badge title="Pixel Perfect" text="WCAG 2.1+ compliant standards 👀" icon="target" />
       </div>
       <div className="figma-native-menu-cta">
@@ -234,15 +240,21 @@ function HeaderSubmenu() {
   );
 }
 
-function PageOneScrollFade() {
+function PageScrollEffects({ source }: { source: string }) {
   useEffect(() => {
-    const host = document.querySelector<HTMLElement>('.figma-page-host[data-source="page-1.md"]');
+    const host = document.querySelector<HTMLElement>(`.figma-page-host[data-source="${source}"]`);
     if (!host || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
+    document.documentElement.classList.add("page-scroll-snap-enabled");
+    document.body.classList.add("page-scroll-snap-enabled");
+
     const sections = Array.from(host.querySelectorAll<HTMLElement>(":scope > div > div"));
-    const restorationAssets = Array.from(host.querySelectorAll<HTMLElement>(".figma-restoration-asset"));
+    const restorationAssets =
+      source === "content/pages/page-1.md"
+        ? Array.from(host.querySelectorAll<HTMLElement>(".figma-restoration-asset"))
+        : [];
     const targets = [...sections, ...restorationAssets];
 
     targets.forEach((target, index) => {
@@ -255,7 +267,8 @@ function PageOneScrollFade() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove("is-visible");
           }
         });
       },
@@ -266,12 +279,14 @@ function PageOneScrollFade() {
 
     return () => {
       observer.disconnect();
+      document.documentElement.classList.remove("page-scroll-snap-enabled");
+      document.body.classList.remove("page-scroll-snap-enabled");
       targets.forEach((target) => {
         target.classList.remove("page-screen-fade", "is-visible");
         target.style.transitionDelay = "";
       });
     };
-  }, []);
+  }, [source]);
 
   return null;
 }
@@ -379,7 +394,7 @@ function KitSidebar({
   );
 }
 
-function getGroupCode(group: RawFigmaGroup) {
+function getGroupCode(group: RawSiteGroup) {
   const pageIndex = rawPageGroups.findIndex((page) => page.id === group.id);
   if (pageIndex >= 0) {
     return `P${String(pageIndex + 1).padStart(3, "0")}`;
@@ -396,12 +411,14 @@ function RawPreview({
   total,
 }: {
   code: string;
-  group: RawFigmaGroup;
+  group: RawSiteGroup;
   index: number;
   total: number;
 }) {
   const Component = group.component;
   const [copied, setCopied] = useState(false);
+  const previewRoute = group.sourceKind === "page" ? pageRouteBySource[group.source] : undefined;
+  const previewHref = previewRoute ? `${window.location.origin}${window.location.pathname}#${previewRoute}` : undefined;
 
   const copyCode = async () => {
     await navigator.clipboard.writeText(code);
@@ -424,14 +441,21 @@ function RawPreview({
             {group.family} · {group.source}
           </span>
         </div>
-        <button className="raw-copy-code" type="button" onClick={copyCode}>
-          {copied ? "Copied" : "Copy ID"}
-        </button>
+        <div className="raw-preview-actions">
+          {previewHref ? (
+            <a className="raw-preview-open" href={previewHref} target="_blank" rel="noreferrer">
+              新页签预览
+            </a>
+          ) : null}
+          <button className="raw-copy-code" type="button" onClick={copyCode}>
+            {copied ? "Copied" : "Copy ID"}
+          </button>
+        </div>
       </header>
       <div className="raw-render-frame" style={group.frameHeight ? { height: group.frameHeight } : undefined}>
         <Component />
-        {group.source === "page-1.md" ? <HomepageRestoration /> : null}
-        {group.source === "contact.md" ? <ContactRestoration /> : null}
+        {group.source === "content/pages/page-1.md" ? <HomepageRestoration /> : null}
+        {group.source === "content/pages/contact.md" ? <ContactRestoration /> : null}
       </div>
     </article>
   );

@@ -1,14 +1,14 @@
 # Module Catalog
 
-模块目录由 `src/generated/figmaRegistry.tsx` 自动生成，不手写维护。运行时使用：
+模块目录由 `src/generated/siteRegistry.tsx` 自动生成，不手写维护。运行时使用：
 
 ```ts
-import { rawPageGroups, rawSectionGroups, rawSectionFamilies } from "./generated/figmaRegistry";
+import { rawPageGroups, rawSectionGroups, rawSectionFamilies } from "./generated/siteRegistry";
 ```
 
 ## Group 结构
 
-每个 `RawFigmaGroup` 都包含：
+每个 `RawSiteGroup` 都包含：
 
 | 字段 | 说明 |
 |---|---|
@@ -45,7 +45,7 @@ import { rawPageGroups, rawSectionGroups, rawSectionFamilies } from "./generated
 
 ```tsx
 const group = rawSectionGroups.find(
-  (item) => item.source === "sections/pricing.md" && item.startLine === 679,
+  (item) => item.source === "content/sections/pricing.md" && item.startLine === 679,
 );
 const Component = group?.component;
 ```
@@ -60,6 +60,6 @@ const Component = group?.component;
 ## 扩模块规则
 
 1. 修改或补齐原始 `md` 中的代码组。
-2. 运行 `npm run extract:figma`。
-3. 在 `src/generated/figmaRegistry.tsx` 检查新 group 是否有正确的 `source/startLine/cssNotes`。
+2. 运行 `npm run extract:content`。
+3. 在 `src/generated/siteRegistry.tsx` 检查新 group 是否有正确的 `source/startLine/cssNotes`。
 4. 业务页面引用 generated component，不手写重复视觉。

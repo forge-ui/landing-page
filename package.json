@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "extract:figma": "node scripts/extract-figma-md.mjs",
-    "prebuild": "npm run extract:figma",
+    "extract:content": "node scripts/extract-content-md.mjs",
+    "prebuild": "npm run extract:content",
     "dev": "vite --host 0.0.0.0",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0",
